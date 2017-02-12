@@ -37,8 +37,12 @@ body{
     height: 40px;
     background-image: url("../img/iview-name.png");
 }
+.home-desc{
+    margin: 20px 0 20px;
+    font-size: 14px;
+}
 .home-menu{
-    margin: 50px 0 150px;
+    margin: 35px 0 150px;
 }
 .home-version{
     position: fixed;
