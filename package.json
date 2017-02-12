@@ -1,0 +1,35 @@
+{
+  "name": "iview-cli",
+  "version": "0.0.1",
+  "title": "iView Cli",
+  "description": "Quick way to create an iView project.",
+  "homepage": "http://www.iviewui.com",
+  "keywords": [
+    "iview",
+    "vue",
+    "vue.js",
+    "cli"
+  ],
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js",
+    "package": "electron-packager ./ iView --platform=darwin --arch=x64 ~/Desktop/iView --version 0.30.2 --overwrite --icon=./assets/img/WeFlow.icns"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iview/iview-cli"
+  },
+  "author": "Aresn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iview/iview-cli/issues"
+  },
+  "dependencies": {
+    "iview": "^0.9.17",
+    "vue": "^1.0.28"
+  },
+  "devDependencies": {
+    "electron-packager": "^8.5.1",
+    "electron-prebuilt": "^1.4.13"
+  }
+}

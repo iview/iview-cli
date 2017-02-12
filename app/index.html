@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+    <title>iView</title>
+    <link rel="stylesheet" href="../assets/css/iview.css">
+    <link rel="stylesheet" href="../assets/css/app.css">
+</head>
+<body>
+    <div class="title"></div>
+    <div id="app" v-cloak>
+        <div class="home-app">
+            <Row class="home-row" type="flex" justify="center" align="middle">
+                <i-col span="24">
+                    <div class="home-logo"></div>
+                    <div class="home-name"></div>
+                    <div class="home-desc"></div>
+                    <Row class="home-menu" :gutter="32">
+                        <i-col span="9" :offset="3">
+                            <i-button type="ghost" long icon="ios-plus-empty">新建工程</i-button>
+                        </i-col>
+                        <i-col span="9">
+                            <i-button type="ghost" long icon="ios-keypad">离线文档</i-button>
+                        </i-col>
+                    </Row>
+                </i-col>
+            </Row>
+            <div class="home-version">
+                当前 iView 版本：<a href="javascript:void(0)">1.0.0</a>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../assets/js/vue.min.js"></script>
+    <script type="text/javascript" src="../assets/js/iview.min.js"></script>
+    <script type="text/javascript" src="../src/app.js"></script>
+</body>
+</html>
