@@ -56,3 +56,17 @@ body{
     right: 0;
     text-align: center;
 }
+
+.create-app{
+    position: absolute;
+    top: 40px;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    overflow: auto;
+}
+.create-app-submit{
+    width: 80%;
+    margin: 0 auto;
+}

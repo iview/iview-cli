@@ -8,10 +8,9 @@
     <link rel="stylesheet" href="../assets/css/app.css">
 </head>
 <body>
-    <div class="title">iView</div>
+    <div class="title">iView - 新建工程</div>
     <div id="app" v-cloak>
         <div class="create-app">
-            <div class="subtitle">新建工程</div>
             <div class="create-form">
                 <i-form v-ref:form-validate :model="formValidate" :rules="ruleValidate" :label-width="100">
                     <Form-item label="iView 版本：" prop="iviewVersion">
@@ -34,7 +33,10 @@
                             </Tooltip>
                             <span>：</span>
                         </div>
-                        <Switch :checked.sync="formValidate.ajax"></Switch>
+                        <Switch :checked.sync="formValidate.ajax">
+                            <Icon type="android-done" slot="open"></Icon>
+                            <Icon type="android-close" slot="close"></Icon>
+                        </Switch>
                     </Form-item>
                     <Form-item label="多语言：" prop="i18n">
                         <div slot="label">
@@ -44,7 +46,10 @@
                             </Tooltip>
                             <span>：</span>
                         </div>
-                        <Switch :checked.sync="formValidate.i18n"></Switch>
+                        <Switch :checked.sync="formValidate.i18n">
+                            <Icon type="android-done" slot="open"></Icon>
+                            <Icon type="android-close" slot="close"></Icon>
+                        </Switch>
                     </Form-item>
                     <Form-item label="状态管理：" prop="store">
                         <Checkbox-group :model.sync="formValidate.store">
@@ -52,11 +57,34 @@
                             <Checkbox value="bus.js"></Checkbox>
                         </Checkbox-group>
                     </Form-item>
-                    <Form-item>
-                        <i-button type="primary" @click="handleSubmit('formValidate')">提交</i-button>
-                        <i-button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">重置</i-button>
+                    <Form-item label="图表：" prop="chart">
+                        <Checkbox-group :model.sync="formValidate.chart">
+                            <Checkbox value="echarts"></Checkbox>
+                        </Checkbox-group>
+                    </Form-item>
+                    <Form-item label="ESLint：" prop="eslint">
+                        <Switch :checked.sync="formValidate.eslint">
+                            <Icon type="android-done" slot="open"></Icon>
+                            <Icon type="android-close" slot="close"></Icon>
+                        </Switch>
+                    </Form-item>
+                    <Form-item label="附加功能：" prop="funs">
+                        <Checkbox-group :model.sync="formValidate.funs">
+                            <Checkbox value="cookies">Cookie（js-cookie）</Checkbox>
+                            <Checkbox value="clipboard">复制（clipboard）</Checkbox>
+                            <Checkbox value="html2canvas">图像存储（html2canvas）</Checkbox>
+                            <Checkbox value="rasterizeHTML">图像存储（rasterizeHTML）</Checkbox>
+                        </Checkbox-group>
                     </Form-item>
                 </i-form>
+                <Row class="create-app-submit">
+                    <i-col span="9" offset="2">
+                        <i-button type="primary" long @click="handleSubmit('formValidate')">下一步</i-button>
+                    </i-col>
+                    <i-col span="9" offset="2">
+                        <i-button type="ghost" long @click="handleReset('formValidate')" style="margin-left: 8px">重置</i-button>
+                    </i-col>
+                </Row>
             </div>
         </div>
     </div>

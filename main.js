@@ -7,8 +7,9 @@ let win;
 
 function createWindow () {
     win = new BrowserWindow({
-        width: 360,
-        height: 580,
+        // width: 360,
+        width: 1000,
+        height: 650,
         title: 'iView',
         center: true,
         resizable: false,
@@ -23,7 +24,7 @@ function createWindow () {
     }));
 
     // 打开开发者工具。
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
 
     // 当 window 被关闭，这个事件会被触发。
     win.on('closed', () => {
