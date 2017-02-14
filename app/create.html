@@ -12,7 +12,7 @@
     <div id="app" v-cloak>
         <div class="create-app">
             <div class="create-form">
-                <i-form v-ref:form-validate :model="formValidate" :rules="ruleValidate" :label-width="100">
+                <i-form v-ref:form-validate :model="formValidate" :rules="ruleValidate" :label-width="120">
                     <Form-item label="iView 版本：" prop="iviewVersion">
                         <Radio-group :model.sync="formValidate.iviewVersion">
                             <Radio value="1.x">1.x</Radio>
@@ -21,8 +21,8 @@
                     </Form-item>
                     <Form-item label="CSS 预处理：" prop="css">
                         <Checkbox-group :model.sync="formValidate.css">
-                            <Checkbox value="Less"></Checkbox>
-                            <Checkbox value="Sass"></Checkbox>
+                            <Checkbox value="less"></Checkbox>
+                            <Checkbox value="sass"></Checkbox>
                         </Checkbox-group>
                     </Form-item>
                     <Form-item label="Ajax：" prop="ajax">
@@ -73,13 +73,31 @@
                             <Checkbox value="cookies">Cookie（js-cookie）</Checkbox>
                             <Checkbox value="clipboard">复制（clipboard）</Checkbox>
                             <Checkbox value="html2canvas">图像存储（html2canvas）</Checkbox>
-                            <Checkbox value="rasterizeHTML">图像存储（rasterizeHTML）</Checkbox>
+                            <Checkbox value="rasterizehtml">图像存储（rasterizeHTML）</Checkbox>
                         </Checkbox-group>
                     </Form-item>
+                    <a href="javascript:void(0)" class="create-app-more" v-if="!showMore" @click="handleShowMore">
+                        <span>显示更多配置</span>
+                        <Icon type="ios-arrow-down"></Icon>
+                    </a>
+                    <template v-if="showMore">
+                        <Form-item label="项目名称：" prop="name">
+                            <i-input :value.sync="formValidate.name" placeholder="请输入项目名，推荐使用英文"></i-input>
+                        </Form-item>
+                        <Form-item label="版本号：" prop="version">
+                            <i-input :value.sync="formValidate.version" placeholder="请输入版本号，例如 1.0.0"></i-input>
+                        </Form-item>
+                        <Form-item label="项目介绍：" prop="desc">
+                            <i-input type="textarea" :value.sync="formValidate.desc" placeholder="请输入项目介绍..."></i-input>
+                        </Form-item>
+                        <Form-item label="Git 地址：" prop="git">
+                            <i-input :value.sync="formValidate.git" placeholder="请输入项目所在仓库地址"></i-input>
+                        </Form-item>
+                    </template>
                 </i-form>
                 <Row class="create-app-submit">
                     <i-col span="9" offset="2">
-                        <i-button type="primary" long @click="handleSubmit('formValidate')">下一步</i-button>
+                        <i-button type="primary" long @click="handleSubmit('formValidate')">创建工程</i-button>
                     </i-col>
                     <i-col span="9" offset="2">
                         <i-button type="ghost" long @click="handleReset('formValidate')" style="margin-left: 8px">重置</i-button>

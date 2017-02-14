@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "iview": "^0.9.17",
+    "js-beautify": "^1.6.9",
     "vue": "^1.0.28"
   },
   "devDependencies": {

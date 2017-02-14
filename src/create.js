@@ -4,6 +4,9 @@ const BrowserWindow = remote.BrowserWindow;
 const win = BrowserWindow.getAllWindows()[0];
 const dialog = remote.dialog;
 
+const fs = require('fs');
+const createPackage = require('../src/services/package');
+
 let saveDirectory = undefined;
 
 const app = new Vue({
@@ -17,11 +20,16 @@ const app = new Vue({
             store: [],
             chart: [],
             eslint: true,
-            funs: []
+            funs: [],
+            name: '',
+            version: '1.0.0',
+            desc: '',
+            git: ''
         },
         ruleValidate: {
 
-        }
+        },
+        showMore: false
     },
     methods: {
         handleSubmit (name) {
@@ -31,12 +39,21 @@ const app = new Vue({
                         title: '选择工程保存目录',
                         properties: ['openDirectory', 'createDirectory']
                     });
-
+                    createPackage({
+                        data: this.formValidate,
+                        directory: saveDirectory,
+                        success: () => {
+                            this.$Message.info('创建成功');
+                        }
+                    })
                 }
             });
         },
         handleReset (name) {
             this.$refs[name].resetFields();
+        },
+        handleShowMore () {
+            this.showMore = true;
         }
     }
 });

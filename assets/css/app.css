@@ -12,7 +12,7 @@ body{
     height: 20px;
     text-align: center;
     -webkit-app-region: drag;
-    padding: 2px 0;
+    padding: 4px 0 0;
     font-size: 14px;
 }
 .subtitle{
@@ -65,6 +65,17 @@ body{
     right: 0;
     z-index: 1;
     overflow: auto;
+}
+.create-form{
+    margin-right: 15px;
+}
+.create-app .ivu-form-item{
+    margin-bottom: 10px;
+}
+.create-app-more{
+    display: block;
+    margin: 0 auto 16px;
+    text-align: center;
 }
 .create-app-submit{
     width: 80%;

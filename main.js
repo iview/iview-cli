@@ -7,9 +7,9 @@ let win;
 
 function createWindow () {
     win = new BrowserWindow({
-        // width: 360,
+        width: 360,
         width: 1000,
-        height: 650,
+        // height: 572,
         title: 'iView',
         center: true,
         resizable: false,
