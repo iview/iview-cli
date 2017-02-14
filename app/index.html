@@ -10,7 +10,7 @@
 <body>
     <div class="title"></div>
     <div id="app" v-cloak>
-        <div class="home-app">
+        <div class="home-app" v-if="!isHidden">
             <Row class="home-row" type="flex" justify="center" align="middle">
                 <i-col span="24">
                     <div class="home-logo"></div>
@@ -18,10 +18,10 @@
                     <div class="home-desc">高效、卓越的整套前端解决方案</div>
                     <Row class="home-menu" :gutter="32">
                         <i-col span="9" :offset="3">
-                            <i-button type="ghost" long icon="ios-plus-empty">新建工程</i-button>
+                            <i-button type="ghost" long icon="ios-plus-empty" @click="handleCreateApp">新建工程</i-button>
                         </i-col>
                         <i-col span="9">
-                            <i-button type="ghost" long icon="ios-keypad">离线文档</i-button>
+                            <i-button type="ghost" long icon="ios-keypad" @click="handleOpenDoc">离线文档</i-button>
                         </i-col>
                     </Row>
                 </i-col>

@@ -1,6 +1,7 @@
 body{
     width: 100%;
     height: 100%;
+    overflow: hidden;
     -webkit-user-select: none;
     user-select: none;
 }
@@ -12,6 +13,10 @@ body{
     text-align: center;
     -webkit-app-region: drag;
     padding: 2px 0;
+    font-size: 14px;
+}
+.subtitle{
+    padding: 15px;
     font-size: 14px;
 }
 .home-app{
