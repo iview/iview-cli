@@ -6,7 +6,7 @@ const dialog = remote.dialog;
 
 const fs = require('fs');
 const createPackage = require('../src/services/package');
-const createWebpack = require('../src/services/webpack');
+const { createWebpackBase, createWebpackDev, createWebpackProd } = require('../src/services/webpack');
 
 let saveDirectory = undefined;
 
@@ -46,7 +46,9 @@ const app = new Vue({
         status: 'options',    // options,log
         log: {    // 1 is doing, 2 is done, 3 is error
             package: 1,
-            webpack: 1
+            webpackBase: 1,
+            webpackDev: 1,
+            webpackProd: 1,
         }
     },
     methods: {
@@ -71,14 +73,34 @@ const app = new Vue({
                             }
                         });
 
-                        createWebpack({
+                        createWebpackBase({
                             data: this.formValidate,
                             directory: saveDirectory,
                             success: () => {
-                                this.log.webpack = 2;
+                                this.log.webpackBase = 2;
                             },
                             error: () => {
-                                this.log.webpack = 3;
+                                this.log.webpackBase = 3;
+                            }
+                        });
+                        createWebpackDev({
+                            data: this.formValidate,
+                            directory: saveDirectory,
+                            success: () => {
+                                this.log.webpackDev = 2;
+                            },
+                            error: () => {
+                                this.log.webpackDev = 3;
+                            }
+                        });
+                        createWebpackProd({
+                            data: this.formValidate,
+                            directory: saveDirectory,
+                            success: () => {
+                                this.log.webpackProd = 2;
+                            },
+                            error: () => {
+                                this.log.webpackProd = 3;
                             }
                         });
 

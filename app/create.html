@@ -110,7 +110,9 @@
             </div>
             <div class="create-info" v-show="status === 'log'">
                 <log :status="log.package" content="创建 package.json"></log>
-                <log :status="log.webpack" content="创建 webpack 配置文件"></log>
+                <log :status="log.webpackBase" content="创建 webpack 基础配置文件"></log>
+                <log :status="log.webpackDev" content="创建 webpack 开发环境配置文件"></log>
+                <log :status="log.webpackProd" content="创建 webpack 生产环境配置文件"></log>
             </div>
         </div>
     </div>
