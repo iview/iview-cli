@@ -58,7 +58,8 @@ const app = new Vue({
                     saveDirectory = dialog.showOpenDialog(win, {
                         title: '选择工程保存目录',
                         properties: ['openDirectory', 'createDirectory']
-                    });
+                    })[0];
+
                     if (saveDirectory) {
                         this.status = 'log';
 
