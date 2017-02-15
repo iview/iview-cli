@@ -10,8 +10,11 @@ const { createWebpackBase, createWebpackDev, createWebpackProd } = require('../s
 const createRouter = require('../src/services/router');
 const createI18n = require('../src/services/i18n');
 const createApp = require('../src/services/app');
-const createIndex = require('../src/services/index');
+const createTemplate = require('../src/services/template');
+const createIndexVue = require('../src/services/index-vue');
+const createIndexHtml = require('../src/services/index-html');
 const createMain = require('../src/services/main');
+const createConfig = require('../src/services/config');
 
 let saveDirectory = undefined;
 
@@ -57,8 +60,11 @@ const app = new Vue({
             router: 1,
             i18n: 1,
             app: 1,
-            index: 1,
-            main: 1
+            indexHtml: 1,
+            indexVue: 1,
+            template: 1,
+            main: 1,
+            config: 1
         }
     },
     methods: {
@@ -156,15 +162,39 @@ const app = new Vue({
                             }
                         });
 
-                        // index.vue
-                        createIndex({
+                        // index.ejs
+                        createTemplate({
                             data: this.formValidate,
                             directory: saveDirectory,
                             success: () => {
-                                this.log.index = 2;
+                                this.log.template = 2;
                             },
                             error: () => {
-                                this.log.index = 3;
+                                this.log.template = 3;
+                            }
+                        });
+
+                        // index.html
+                        createIndexHtml({
+                            data: this.formValidate,
+                            directory: saveDirectory,
+                            success: () => {
+                                this.log.indexHtml = 2;
+                            },
+                            error: () => {
+                                this.log.indexHtml = 3;
+                            }
+                        });
+
+                        // index.vue
+                        createIndexVue({
+                            data: this.formValidate,
+                            directory: saveDirectory,
+                            success: () => {
+                                this.log.indexVue = 2;
+                            },
+                            error: () => {
+                                this.log.indexVue = 3;
                             }
                         });
 
@@ -177,6 +207,18 @@ const app = new Vue({
                             },
                             error: () => {
                                 this.log.main = 3;
+                            }
+                        });
+
+                        // config.js
+                        createConfig({
+                            data: this.formValidate,
+                            directory: saveDirectory,
+                            success: () => {
+                                this.log.config = 2;
+                            },
+                            error: () => {
+                                this.log.config = 3;
                             }
                         });
                     }
