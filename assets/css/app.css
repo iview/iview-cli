@@ -84,3 +84,12 @@ body{
     width: 80%;
     margin: 0 auto;
 }
+
+.create-info li{
+    list-style: none;
+    margin: 5px 0 0 15px;
+}
+.create-info li i{
+    position: relative;
+    top: 1px;
+}

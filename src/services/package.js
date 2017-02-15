@@ -1,4 +1,3 @@
-const fs = require('fs');
 const writeFile = require('./write-file');
 
 let file = {
@@ -91,6 +90,9 @@ module.exports = function (opts) {
         },
         success () {
             opts.success();
+        },
+        error () {
+            opts.error();
         }
     });
 };
