@@ -121,6 +121,8 @@
                 <log :status="log.indexVue" content="创建首页组件 index.vue"></log>
                 <log :status="log.main" content="创建入口文件 main.js"></log>
                 <log :status="log.config" content="创建配置文件 config.js"></log>
+                <log :status="log.util" content="创建工具集文件 util.js"></log>
+                <log :status="log.bus" content="创建中央事件总线文件 bus.js" v-if="formValidate.store.indexOf('bus.js') > -1"></log>
             </div>
         </div>
     </div>

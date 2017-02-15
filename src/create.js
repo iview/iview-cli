@@ -15,6 +15,8 @@ const createIndexVue = require('../src/services/index-vue');
 const createIndexHtml = require('../src/services/index-html');
 const createMain = require('../src/services/main');
 const createConfig = require('../src/services/config');
+const createUtil = require('../src/services/util');
+const createBus = require('../src/services/bus');
 
 let saveDirectory = undefined;
 
@@ -64,7 +66,9 @@ const app = new Vue({
             indexVue: 1,
             template: 1,
             main: 1,
-            config: 1
+            config: 1,
+            util: 1,
+            bus: 1
         }
     },
     methods: {
@@ -221,6 +225,32 @@ const app = new Vue({
                                 this.log.config = 3;
                             }
                         });
+
+                        // util.js
+                        createUtil({
+                            data: this.formValidate,
+                            directory: saveDirectory,
+                            success: () => {
+                                this.log.util = 2;
+                            },
+                            error: () => {
+                                this.log.util = 3;
+                            }
+                        });
+
+                        // bus.js
+                        if (this.formValidate.store.indexOf('bus.js') > -1) {
+                            createBus({
+                                data: this.formValidate,
+                                directory: saveDirectory,
+                                success: () => {
+                                    this.log.bus = 2;
+                                },
+                                error: () => {
+                                    this.log.bus = 3;
+                                }
+                            });
+                        }
                     }
                 }
             });
