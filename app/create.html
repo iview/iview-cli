@@ -11,7 +11,7 @@
     <div class="title">iView - 新建工程</div>
     <div id="app" v-cloak>
         <div class="create-app">
-            <div class="create-form">
+            <div class="create-form" v-show="status === 'options'">
                 <i-form v-ref:form-validate :model="formValidate" :rules="ruleValidate" :label-width="120">
                     <Form-item label="iView 版本：" prop="iviewVersion">
                         <Radio-group :model.sync="formValidate.iviewVersion">
@@ -80,7 +80,7 @@
                         <span>显示更多配置</span>
                         <Icon type="ios-arrow-down"></Icon>
                     </a>
-                    <template v-if="showMore">
+                    <div class="create-app-more-item" v-if="showMore">
                         <Form-item label="项目名称：" prop="name">
                             <i-input :value.sync="formValidate.name" placeholder="请输入项目名，推荐使用英文"></i-input>
                         </Form-item>
@@ -93,7 +93,7 @@
                         <Form-item label="Git 地址：" prop="git">
                             <i-input :value.sync="formValidate.git" placeholder="请输入项目所在仓库地址"></i-input>
                         </Form-item>
-                    </template>
+                    </div>
                 </i-form>
                 <Row class="create-app-submit">
                     <i-col span="9" offset="2">
@@ -103,6 +103,9 @@
                         <i-button type="ghost" long @click="handleReset('formValidate')" style="margin-left: 8px">重置</i-button>
                     </i-col>
                 </Row>
+            </div>
+            <div class="create-info" v-show="status === 'log'">
+
             </div>
         </div>
     </div>

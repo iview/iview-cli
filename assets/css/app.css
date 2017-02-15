@@ -77,6 +77,9 @@ body{
     margin: 0 auto 16px;
     text-align: center;
 }
+.create-app-more-item{
+    margin-bottom: 30px;
+}
 .create-app-submit{
     width: 80%;
     margin: 0 auto;

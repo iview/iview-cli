@@ -29,7 +29,8 @@ const app = new Vue({
         ruleValidate: {
 
         },
-        showMore: false
+        showMore: false,
+        status: 'options'    // options,log
     },
     methods: {
         handleSubmit (name) {
