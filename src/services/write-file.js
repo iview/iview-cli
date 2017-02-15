@@ -1,6 +1,7 @@
 const fs = require('fs');
 const beauty = require('js-beautify').js_beautify;
 const beautyHtml = require('js-beautify').html;
+const beautyCss = require('js-beautify').css;
 
 module.exports = function (opts) {
     opts.codeFormat = opts.codeFormat || {};
@@ -15,6 +16,12 @@ module.exports = function (opts) {
         data = beauty(opts.data, Object.assign({
             indent_size: 4
         }, opts.codeFormat));
+    } else if (opts.codeType === 'css') {
+        data = beautyCss(opts.data, Object.assign({
+            indent_size: 4
+        }, opts.codeFormat));
+    } else if (opts.codeType === 'none') {
+        data = opts.data;
     }
 
     if (!fs.existsSync(opts.directory)) {

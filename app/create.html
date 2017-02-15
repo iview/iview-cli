@@ -123,6 +123,8 @@
                 <log :status="log.config" content="创建配置文件 config.js"></log>
                 <log :status="log.util" content="创建工具集文件 util.js"></log>
                 <log :status="log.bus" content="创建中央事件总线文件 bus.js" v-if="formValidate.store.indexOf('bus.js') > -1"></log>
+                <log :status="log.eslintRc" content="创建 ESLint 配置文件 .eslintrc.json" v-if="formValidate.eslint"></log>
+                <log :status="log.eslintIgnore" content="创建 ESLint 忽略文件 .eslintignore" v-if="formValidate.eslint"></log>
             </div>
         </div>
     </div>

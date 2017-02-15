@@ -17,6 +17,7 @@ const createMain = require('../src/services/main');
 const createConfig = require('../src/services/config');
 const createUtil = require('../src/services/util');
 const createBus = require('../src/services/bus');
+const { createESLintRc, createESLintIgnore } = require('../src/services/eslint');
 
 let saveDirectory = undefined;
 
@@ -68,7 +69,9 @@ const app = new Vue({
             main: 1,
             config: 1,
             util: 1,
-            bus: 1
+            bus: 1,
+            eslintRc: 1,
+            eslintIgnore: 1
         }
     },
     methods: {
@@ -248,6 +251,30 @@ const app = new Vue({
                                 },
                                 error: () => {
                                     this.log.bus = 3;
+                                }
+                            });
+                        }
+
+                        // ESLint
+                        if (this.formValidate.eslint) {
+                            createESLintRc({
+                                data: this.formValidate,
+                                directory: saveDirectory,
+                                success: () => {
+                                    this.log.eslintRc = 2;
+                                },
+                                error: () => {
+                                    this.log.eslintRc = 3;
+                                }
+                            });
+                            createESLintIgnore({
+                                data: this.formValidate,
+                                directory: saveDirectory,
+                                success: () => {
+                                    this.log.eslintIgnore = 2;
+                                },
+                                error: () => {
+                                    this.log.eslintIgnore = 3;
                                 }
                             });
                         }
