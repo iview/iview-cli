@@ -9,6 +9,7 @@ const createPackage = require('../src/services/package');
 const { createWebpackBase, createWebpackDev, createWebpackProd } = require('../src/services/webpack');
 const createRouter = require('../src/services/router');
 const createI18n = require('../src/services/i18n');
+const createMain = require('../src/services/main');
 
 let saveDirectory = undefined;
 
@@ -52,7 +53,8 @@ const app = new Vue({
             webpackDev: 1,
             webpackProd: 1,
             router: 1,
-            i18n: 1
+            i18n: 1,
+            main: 1
         }
     },
     methods: {
@@ -62,9 +64,10 @@ const app = new Vue({
                     saveDirectory = dialog.showOpenDialog(win, {
                         title: '选择工程保存目录',
                         properties: ['openDirectory', 'createDirectory']
-                    })[0];
+                    });
 
                     if (saveDirectory) {
+                        saveDirectory = saveDirectory[0];
                         this.status = 'log';
 
                         // package.json
@@ -136,6 +139,18 @@ const app = new Vue({
                                 }
                             });
                         }
+
+                        // main
+                        createMain({
+                            data: this.formValidate,
+                            directory: saveDirectory,
+                            success: () => {
+                                this.log.main = 2;
+                            },
+                            error: () => {
+                                this.log.main = 3;
+                            }
+                        });
                     }
                 }
             });

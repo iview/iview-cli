@@ -113,8 +113,9 @@
                 <log :status="log.webpackBase" content="创建 webpack 基础配置文件"></log>
                 <log :status="log.webpackDev" content="创建 webpack 开发环境配置文件"></log>
                 <log :status="log.webpackProd" content="创建 webpack 生产环境配置文件"></log>
-                <log :status="log.router" content="创建路由配置文件"></log>
-                <log :status="log.i18n" content="创建多语言配置文件" v-if="formValidate.i18n"></log>
+                <log :status="log.router" content="创建路由配置文件 router.js"></log>
+                <log :status="log.i18n" content="创建多语言配置文件 locale.js" v-if="formValidate.i18n"></log>
+                <log :status="log.main" content="创建入口文件 main.js"></log>
             </div>
         </div>
     </div>
