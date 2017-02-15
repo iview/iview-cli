@@ -1,10 +1,31 @@
 const writeFile = require('./write-file');
 
 module.exports = function (opts) {
+    let ajax = '';
+    let ajaxSetting = '';
+    if (opts.data.ajax) {
+        ajax = `
+            import axios from 'axios';
+        `;
+        ajaxSetting = `
+            const ajaxUrl = env === 'development' ?
+            'http://127.0.0.1:8888' :
+            env === 'production' ?
+                'https://www.url.com' :
+                'https://debug.url.com';
+        
+            util.ajax = axios.create({
+                baseURL: ajaxUrl,
+                timeout: 30000
+            });`;
+    }
+
     const file = `
+        ${ajax}
         let util = {
 
         };
+        ${ajaxSetting}
 
         export default util;
     `;

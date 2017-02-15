@@ -76,8 +76,8 @@
                         <Checkbox-group :model.sync="formValidate.funs">
                             <Checkbox value="cookies">Cookie（js-cookie）</Checkbox>
                             <Checkbox value="clipboard">复制（clipboard）</Checkbox>
-                            <Checkbox value="html2canvas">图像存储（html2canvas）</Checkbox>
-                            <Checkbox value="rasterizehtml">图像存储（rasterizeHTML）</Checkbox>
+                            <Checkbox value="html2canvas">HTML 转图片（html2canvas）</Checkbox>
+                            <Checkbox value="rasterizehtml">HTML 转图片（rasterizeHTML）</Checkbox>
                         </Checkbox-group>
                     </Form-item>
                     <a href="javascript:void(0)" class="create-app-more" v-if="!showMore" @click="handleShowMore">
