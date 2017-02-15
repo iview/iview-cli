@@ -8,6 +8,7 @@ const fs = require('fs');
 const createPackage = require('../src/services/package');
 const { createWebpackBase, createWebpackDev, createWebpackProd } = require('../src/services/webpack');
 const createRouter = require('../src/services/router');
+const createI18n = require('../src/services/i18n');
 
 let saveDirectory = undefined;
 
@@ -50,7 +51,8 @@ const app = new Vue({
             webpackBase: 1,
             webpackDev: 1,
             webpackProd: 1,
-            router: 1
+            router: 1,
+            i18n: 1
         }
     },
     methods: {
@@ -65,6 +67,7 @@ const app = new Vue({
                     if (saveDirectory) {
                         this.status = 'log';
 
+                        // package.json
                         createPackage({
                             data: this.formValidate,
                             directory: saveDirectory,
@@ -76,6 +79,7 @@ const app = new Vue({
                             }
                         });
 
+                        // webpack
                         createWebpackBase({
                             data: this.formValidate,
                             directory: saveDirectory,
@@ -107,6 +111,7 @@ const app = new Vue({
                             }
                         });
 
+                        // router
                         createRouter({
                             data: this.formValidate,
                             directory: saveDirectory,
@@ -117,6 +122,20 @@ const app = new Vue({
                                 this.log.router = 3;
                             }
                         });
+
+                        // i18n
+                        if (this.formValidate.i18n) {
+                            createI18n({
+                                data: this.formValidate,
+                                directory: saveDirectory,
+                                success: () => {
+                                    this.log.i18n = 2;
+                                },
+                                error: () => {
+                                    this.log.i18n = 3;
+                                }
+                            });
+                        }
                     }
                 }
             });

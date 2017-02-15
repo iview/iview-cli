@@ -2,18 +2,18 @@ const writeFile = require('./write-file');
 
 module.exports = function (opts) {
     const file = `
-        const routers = {
-            '/index': {
-                component (resolve) {
-                    require(['./views/index.vue'], resolve);
-                }
+        export default {
+            'zh-CN': {
+                
+            },
+            'en-US': {
+                
             }
         };
-        export default routers;
     `;
     writeFile({
         directory: `${opts.directory}/src`,
-        fileName: 'router.js',
+        fileName: 'locale.js',
         data: file,
         success () {
             opts.success();

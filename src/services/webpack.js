@@ -14,7 +14,7 @@ exports.createWebpackBase = function (opts) {
     if (opts.data.css.indexOf('less') > -1) css += `{ test: /\\.less/, loader: 'style!css!less?sourceMap'},`;
     if (opts.data.css.indexOf('sass') > -1) css += `{ test: /\\.scss$/, loader: 'style!css!sass?sourceMap'},`;
 
-    let webpack = `
+    const webpack = `
         const path = require('path');
         const webpack = require('webpack');
         
@@ -85,7 +85,7 @@ exports.createWebpackDev = function (opts) {
             'css-loader!sass-loader'
         )`;
 
-    let webpack = `
+    const webpack = `
         const webpack = require('webpack');
         const config = require('./webpack.base.config.js');
         const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -153,7 +153,7 @@ exports.createWebpackProd = function (opts) {
             'css-loader!sass-loader'
         )`;
 
-    let webpack = `
+    const webpack = `
         const webpack = require('webpack');
         const config = require('./webpack.base.config.js');
         const HtmlWebpackPlugin = require('html-webpack-plugin');
