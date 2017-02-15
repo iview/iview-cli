@@ -18,6 +18,8 @@ const createConfig = require('../src/services/config');
 const createUtil = require('../src/services/util');
 const createBus = require('../src/services/bus');
 const { createESLintRc, createESLintIgnore } = require('../src/services/eslint');
+const createGitignore = require('../src/services/gitignore');
+const createEditorconfig = require('../src/services/editorconfig');
 
 let saveDirectory = undefined;
 
@@ -71,7 +73,9 @@ const app = new Vue({
             util: 1,
             bus: 1,
             eslintRc: 1,
-            eslintIgnore: 1
+            eslintIgnore: 1,
+            gitignore: 1,
+            editorconfig: 1
         }
     },
     methods: {
@@ -278,6 +282,30 @@ const app = new Vue({
                                 }
                             });
                         }
+
+                        // .gitignore
+                        createGitignore({
+                            data: this.formValidate,
+                            directory: saveDirectory,
+                            success: () => {
+                                this.log.gitignore = 2;
+                            },
+                            error: () => {
+                                this.log.gitignore = 3;
+                            }
+                        });
+
+                        // .editorconfig
+                        createEditorconfig({
+                            data: this.formValidate,
+                            directory: saveDirectory,
+                            success: () => {
+                                this.log.editorconfig = 2;
+                            },
+                            error: () => {
+                                this.log.editorconfig = 3;
+                            }
+                        });
                     }
                 }
             });
