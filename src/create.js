@@ -7,6 +7,7 @@ const dialog = remote.dialog;
 const fs = require('fs');
 const createPackage = require('../src/services/package');
 const { createWebpackBase, createWebpackDev, createWebpackProd } = require('../src/services/webpack');
+const createRouter = require('../src/services/router');
 
 let saveDirectory = undefined;
 
@@ -49,6 +50,7 @@ const app = new Vue({
             webpackBase: 1,
             webpackDev: 1,
             webpackProd: 1,
+            router: 1
         }
     },
     methods: {
@@ -105,6 +107,16 @@ const app = new Vue({
                             }
                         });
 
+                        createRouter({
+                            data: this.formValidate,
+                            directory: saveDirectory,
+                            success: () => {
+                                this.log.router = 2;
+                            },
+                            error: () => {
+                                this.log.router = 3;
+                            }
+                        });
                     }
                 }
             });
