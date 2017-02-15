@@ -9,6 +9,7 @@ const createPackage = require('../src/services/package');
 const { createWebpackBase, createWebpackDev, createWebpackProd } = require('../src/services/webpack');
 const createRouter = require('../src/services/router');
 const createI18n = require('../src/services/i18n');
+const createApp = require('../src/services/app');
 const createMain = require('../src/services/main');
 
 let saveDirectory = undefined;
@@ -54,6 +55,7 @@ const app = new Vue({
             webpackProd: 1,
             router: 1,
             i18n: 1,
+            app: 1,
             main: 1
         }
     },
@@ -139,6 +141,18 @@ const app = new Vue({
                                 }
                             });
                         }
+
+                        // app.vue
+                        createApp({
+                            data: this.formValidate,
+                            directory: saveDirectory,
+                            success: () => {
+                                this.log.app = 2;
+                            },
+                            error: () => {
+                                this.log.app = 3;
+                            }
+                        });
 
                         // main
                         createMain({
