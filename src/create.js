@@ -10,6 +10,7 @@ const { createWebpackBase, createWebpackDev, createWebpackProd } = require('../s
 const createRouter = require('../src/services/router');
 const createI18n = require('../src/services/i18n');
 const createApp = require('../src/services/app');
+const createIndex = require('../src/services/index');
 const createMain = require('../src/services/main');
 
 let saveDirectory = undefined;
@@ -56,6 +57,7 @@ const app = new Vue({
             router: 1,
             i18n: 1,
             app: 1,
+            index: 1,
             main: 1
         }
     },
@@ -151,6 +153,18 @@ const app = new Vue({
                             },
                             error: () => {
                                 this.log.app = 3;
+                            }
+                        });
+
+                        // index.vue
+                        createIndex({
+                            data: this.formValidate,
+                            directory: saveDirectory,
+                            success: () => {
+                                this.log.index = 2;
+                            },
+                            error: () => {
+                                this.log.index = 3;
                             }
                         });
 
