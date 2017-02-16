@@ -33,5 +33,10 @@
   "devDependencies": {
     "electron-packager": "^8.5.1",
     "electron-prebuilt": "^1.4.13"
+  },
+  "update": {
+    "version": 1,
+    "mac": "",
+    "windows": ""
   }
 }

@@ -7,8 +7,8 @@ let win = null;
 
 function createWindow () {
     win = new BrowserWindow({
-        width: 360,
-        // width: 1000,
+        // width: 360,
+        width: 1000,
         height: 572,
         title: 'iView',
         center: true,
@@ -24,7 +24,7 @@ function createWindow () {
     }));
 
     // 打开开发者工具。
-    // win.webContents.openDevTools();
+    win.webContents.openDevTools();
 
     // 当 window 被关闭，这个事件会被触发。
     win.on('close', (e) => {
@@ -32,7 +32,7 @@ function createWindow () {
             e.preventDefault();
             win.hide();
         }
-    })
+    });
 }
 
 app.on('ready', () => {
@@ -48,5 +48,3 @@ app.on('activate', () => {
 app.on('quit', () => {
     app.quit();
 });
-
-// 检查更新
