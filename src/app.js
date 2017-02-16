@@ -2,7 +2,10 @@ const electron = require('electron');
 const remote = electron.remote;
 const BrowserWindow = remote.BrowserWindow;
 const win = BrowserWindow.getAllWindows()[0];
+const ipcMain = electron.ipcMain;
+
 const axios = require('axios');
+const shell = electron.shell;
 
 const app = new Vue({
     el: '#app',
@@ -25,21 +28,32 @@ const app = new Vue({
             }, 100);
         },
         // 检查更新
-        checkUpdate () {
+        checkUpdate (constraint = false) {
             axios.get('https://raw.githubusercontent.com/iview/iview-cli/master/package.json')
-                .then(function (response) {
+                .then((response) => {
                     const data = response.data;
                     if (data.update.version > this.version) {
                         this.update = data.update;
                         this.showUpdate = true;
+                    } else {
+                        if (constraint) {
+                            this.$Modal.info({
+                                title: '检查更新',
+                                content: '当前已是最新版本。'
+                            })
+                        }
                     }
                 })
-                .catch(function (error) {
-                    console.log(error);
+                .catch((error) => {
+
                 });
         },
         handleOk () {
-
+            if (process.platform == 'darwin') {
+                shell.openExternal(this.update.mac);
+            } else {
+                shell.openExternal(this.update.windows);
+            }
         },
         handleCancel () {
 
