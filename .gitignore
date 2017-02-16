@@ -18,3 +18,4 @@ npm-debug.log
 test/dist/
 dist/
 iView-darwin-x64
+iView-win32-x64

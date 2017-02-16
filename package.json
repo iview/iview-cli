@@ -14,7 +14,7 @@
   "scripts": {
     "start": "electron main.js",
     "build:mac": "electron-packager ./ iView --platform=darwin --arch=x64 ~/Desktop/iView --version 0.30.2 --overwrite --icon=./assets/img/iView.icns",
-    "build:win64": "rimraf dist && electron-packager ./ iView --platform=win32 --arch=x64 --icon=./assets/img/iView.png --overwrite --out ./dist --version=0.37.8 --ignore=.github",
+    "build:win64": "electron-packager ./ iView --platform=win32 --arch=x64 ~/Desktop/iView --version 0.30.2 --overwrite --icon=./assets/img/iView.icns",
     "appdmg": "appdmg appdmg.json ~/Desktop/iView.dmg"
   },
   "repository": {
@@ -30,7 +30,6 @@
     "axios": "^0.15.3",
     "iview": "^0.9.17",
     "js-beautify": "^1.6.9",
-    "rimraf": "^2.5.4",
     "vue": "^1.0.28"
   },
   "devDependencies": {
