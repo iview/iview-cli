@@ -6,6 +6,7 @@ module.exports = function (opts) {
     if (opts.data.ajax) {
         ajax = `
             import axios from 'axios';
+            import env from '../config/env';
         `;
         ajaxSetting = `
             const ajaxUrl = env === 'development' ?

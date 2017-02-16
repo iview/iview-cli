@@ -16,6 +16,7 @@ const createIndexHtml = require('../src/services/index-html');
 const createMain = require('../src/services/main');
 const createConfig = require('../src/services/config');
 const createUtil = require('../src/services/util');
+const { createVuexStore, createVuexActions, createVuexMutations } = require('../src/services/vuex');
 const createBus = require('../src/services/bus');
 const { createESLintRc, createESLintIgnore } = require('../src/services/eslint');
 const createGitignore = require('../src/services/gitignore');
@@ -71,6 +72,9 @@ const app = new Vue({
             main: 1,
             config: 1,
             util: 1,
+            vuexStore: 1,
+            vuexActions: 1,
+            vuexMutations: 1,
             bus: 1,
             eslintRc: 1,
             eslintIgnore: 1,
@@ -244,6 +248,40 @@ const app = new Vue({
                                 this.log.util = 3;
                             }
                         });
+
+                        // vuex
+                        if (this.formValidate.store.indexOf('vuex') > -1) {
+                            createVuexStore({
+                                data: this.formValidate,
+                                directory: saveDirectory,
+                                success: () => {
+                                    this.log.vuexStore = 2;
+                                },
+                                error: () => {
+                                    this.log.vuexStore = 3;
+                                }
+                            });
+                            createVuexActions({
+                                data: this.formValidate,
+                                directory: saveDirectory,
+                                success: () => {
+                                    this.log.vuexActions = 2;
+                                },
+                                error: () => {
+                                    this.log.vuexActions = 3;
+                                }
+                            });
+                            createVuexMutations({
+                                data: this.formValidate,
+                                directory: saveDirectory,
+                                success: () => {
+                                    this.log.vuexMutations = 2;
+                                },
+                                error: () => {
+                                    this.log.vuexMutations = 3;
+                                }
+                            });
+                        }
 
                         // bus.js
                         if (this.formValidate.store.indexOf('bus.js') > -1) {
