@@ -3,6 +3,7 @@ const remote = electron.remote;
 const BrowserWindow = remote.BrowserWindow;
 const win = BrowserWindow.getAllWindows()[0];
 const dialog = remote.dialog;
+const shell = electron.shell;
 
 const fs = require('fs');
 const createPackage = require('../src/services/package');
@@ -57,7 +58,7 @@ const app = new Vue({
 
         },
         showMore: false,
-        status: 'options',    // options,log
+        status: 'options',    // options,log,finish
         log: {    // 1 is doing, 2 is done, 3 is error
             package: 1,
             webpackBase: 1,
@@ -80,6 +81,34 @@ const app = new Vue({
             eslintIgnore: 1,
             gitignore: 1,
             editorconfig: 1
+        }
+    },
+    computed: {
+        titleStatus () {
+            let status = 2;
+            for (let i in this.log) {
+                let item = this.log[i];
+
+                if (i === 'i18n' && !this.formValidate.i18n) continue;
+                if (i === 'vuexStore' && this.formValidate.store.indexOf('vuex') < 0) continue;
+                if (i === 'vuexActions' && this.formValidate.store.indexOf('vuex') < 0) continue;
+                if (i === 'vuexMutations' && this.formValidate.store.indexOf('vuex') < 0) continue;
+                if (i === 'bus' && this.formValidate.store.indexOf('bus') < 0) continue;
+                if (i === 'eslintRc' && !this.formValidate.eslintRc) continue;
+                if (i === 'eslintIgnore' && !this.formValidate.eslintRc) continue;
+
+                if (item === 1) {
+                    status = 1;
+                    break;
+                }
+                if (item === 3) {
+                    status = 3;
+                    break;
+                }
+                status = 2;
+            }
+
+            return status;
         }
     },
     methods: {
@@ -353,6 +382,12 @@ const app = new Vue({
         },
         handleShowMore () {
             this.showMore = true;
+        },
+        handleNext () {
+
+        },
+        handleOpenDirectory () {
+            shell.showItemInFolder(saveDirectory);
         }
     }
 });

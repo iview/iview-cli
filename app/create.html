@@ -10,9 +10,17 @@
 <body>
     <div id="app" v-cloak>
         <div class="title" v-show="status === 'options'">iView - 新建工程</div>
-        <div class="title" v-show="status === 'log'">
+        <div class="title" v-show="status === 'log' && titleStatus === 1">
             iView - 创建中
             <Icon type="load-c" class="ivu-load-loop"></Icon>
+        </div>
+        <div class="title" v-show="status === 'log' && titleStatus === 2">
+            iView - 创建完成
+            <Icon type="ios-checkmark-outline" color="#00cc66"></Icon>
+        </div>
+        <div class="title" v-show="status === 'log' && titleStatus === 3">
+            iView - 创建失败
+            <Icon type="ios-close-outline"  color="#ff5500"></Icon>
         </div>
         <div class="create-app">
             <div class="create-form" v-show="status === 'options'">
@@ -130,6 +138,15 @@
                 <log :status="log.eslintIgnore" content="创建 ESLint 忽略文件 .eslintignore" v-if="formValidate.eslint"></log>
                 <log :status="log.gitignore" content="创建 .gitignore"></log>
                 <log :status="log.editorconfig" content="创建 .editorconfig"></log>
+
+                <Row class="create-app-submit create-info-submit">
+                    <i-col span="9" offset="2">
+                        <i-button type="success" long @click="handleNext" icon="ios-information">进一步配置</i-button>
+                    </i-col>
+                    <i-col span="9" offset="2">
+                        <i-button type="ghost" long @click="handleOpenDirectory" style="margin-left: 8px" icon="folder">打开目录</i-button>
+                    </i-col>
+                </Row>
             </div>
         </div>
     </div>

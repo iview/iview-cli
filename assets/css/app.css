@@ -93,3 +93,6 @@ body{
     position: relative;
     top: 1px;
 }
+.create-info-submit{
+    margin: 15px auto 0;
+}
