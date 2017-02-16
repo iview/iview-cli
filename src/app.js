@@ -4,12 +4,13 @@ const BrowserWindow = remote.BrowserWindow;
 const win = BrowserWindow.getAllWindows()[0];
 const axios = require('axios');
 
-const version = 1;
-
 const app = new Vue({
     el: '#app',
     data: {
-        isHidden: false
+        isHidden: false,
+        version: 1,
+        update: {},
+        showUpdate: false
     },
     methods: {
         handleCreateApp () {
@@ -24,14 +25,24 @@ const app = new Vue({
             }, 100);
         },
         // 检查更新
-        checkUpdate() {
+        checkUpdate () {
             axios.get('https://raw.githubusercontent.com/iview/iview-cli/master/package.json')
                 .then(function (response) {
-                    console.log(response);
+                    const data = response.data;
+                    if (data.update.version > this.version) {
+                        this.update = data.update;
+                        this.showUpdate = true;
+                    }
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
+        },
+        handleOk () {
+
+        },
+        handleCancel () {
+
         }
     },
     ready () {

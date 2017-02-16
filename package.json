@@ -36,7 +36,8 @@
   },
   "update": {
     "version": 1,
-    "mac": "",
-    "windows": ""
+    "mac": "http://www.iviewui.com/mac",
+    "windows": "http://www.iviewui.com/windows",
+    "desc": "<li>离线文档支持 iView 1.0.0 版本</li>"
   }
 }

@@ -30,6 +30,13 @@
                 当前 iView 版本：<a href="javascript:void(0)">1.0.0</a>
             </div>
         </div>
+        <Modal
+            :visible.sync="showUpdate"
+            title="发现新版本"
+            @on-ok="handleOk"
+            @on-cancel="handleCancel">
+
+        </Modal>
     </div>
     <script type="text/javascript" src="../assets/js/vue.min.js"></script>
     <script type="text/javascript" src="../assets/js/iview.min.js"></script>
