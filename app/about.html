@@ -7,6 +7,7 @@
     <style type="text/css">
         body{
             background: #eee;
+            overflow: hidden;
         }
         .about{
             text-align: center;
@@ -16,11 +17,18 @@
             width: 70px;
         }
     </style>
+    <script type="text/javascript">
+        function openLink(event) {
+            event.preventDefault();
+            require('electron').shell.openExternal('https://github.com/iview/iview-cli');
+        }
+    </script>
 </head>
 <body>
     <div class="about">
         <img src="../assets/img/logo.png">
         <p>iView v1.0.0</p>
+        <a href="https://github.com/iview/iview-cli" onclick="openLink(event)">https://github.com/iview/iview-cli</a>
     </div>
 </body>
 </html>

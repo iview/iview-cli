@@ -58,7 +58,7 @@ const app = new Vue({
 
         },
         showMore: false,
-        status: 'options',    // options,log,finish
+        status: 'options',    // options,log,next
         log: {    // 1 is doing, 2 is done, 3 is error
             package: 1,
             webpackBase: 1,
@@ -384,10 +384,19 @@ const app = new Vue({
             this.showMore = true;
         },
         handleNext () {
-
+            this.status = 'next';
         },
         handleOpenDirectory () {
             shell.showItemInFolder(saveDirectory);
+        },
+        handleOpenFile (path) {
+            shell.openItem(`${saveDirectory}/${path}`);
+        },
+        handleOpenLink (url) {
+            shell.openExternal(url);
+        },
+        handleBackHome () {
+            window.location.href = 'index.html';
         }
     }
 });

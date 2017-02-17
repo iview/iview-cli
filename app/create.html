@@ -22,6 +22,7 @@
             iView - 创建失败
             <Icon type="ios-close-outline"  color="#ff5500"></Icon>
         </div>
+        <div class="title" v-show="status === 'next'">iView - 进一步配置</div>
         <div class="create-app">
             <div class="create-form" v-show="status === 'options'">
                 <i-form v-ref:form-validate :model="formValidate" :rules="ruleValidate" :label-width="120">
@@ -141,7 +142,49 @@
 
                 <Row class="create-app-submit create-info-submit">
                     <i-col span="9" offset="2">
-                        <i-button type="success" long @click="handleNext" icon="ios-information">进一步配置</i-button>
+                        <i-button type="success" long @click="handleNext" icon="ios-information" :disabled="titleStatus !== 2">进一步配置</i-button>
+                    </i-col>
+                    <i-col span="9" offset="2">
+                        <i-button type="ghost" long @click="handleOpenDirectory" style="margin-left: 8px" icon="folder">打开目录</i-button>
+                    </i-col>
+                </Row>
+            </div>
+            <div class="create-next" v-show="status === 'next'">
+                <Alert show-icon>
+                    <Icon type="ios-lightbulb-outline" slot="icon"></Icon>
+                    <span slot="desc">
+                        iView Cli 已将所有配置文件保存在指定的<a href="javascript:void(0)" @click="handleOpenDirectory">目录</a>，按照下面的流程可以启动项目。对于一些定制内容，可以进一步配置。
+                    </span>
+                </Alert>
+                <Alert>请预先全局安装 Node.js、npm 、webpack。</Alert>
+                <h4>安装依赖</h4>
+                <code>$ npm install</code>
+                <h4>启动服务（开发环境）</h4>
+                <code>$ npm run dev</code>
+                <p>
+                    服务启动后，打开 <a href="javascript:void(0)" @click="handleOpenLink('http://127.0.0.1:8080')">http://127.0.0.1:8080</a> 访问网站
+                </p>
+                <p></p>
+                <h4>编译打包（生产环境）</h4>
+                <code>$ npm run build</code>
+                <template v-if="formValidate.ajax">
+                    <h4>配置 Ajax</h4>
+                    <p>iView 使用 <strong>axios</strong> 完成 Ajax 请求，并且将其封装在了 <a href="javascript:void(0)" @click="handleOpenFile('src/libs/util.js')">src/libs/util.js</a> 里，点击文件修改具体配置。</p>
+                </template>
+                <h4>修改 html 模板</h4>
+                <p>修改 <a href="javascript:void(0)" @click="handleOpenFile('src/template/index.ejs')">src/template/index.ejs</a> 文件，使用 webpack 重新编译，可以改变入口 html。</p>
+                <template v-if="formValidate.i18n">
+                    <h4>多语言</h4>
+                    <p>iView 已预先将多语言配置写入 <a href="javascript:void(0)" @click="handleOpenFile('src/main.js')">src/main.js</a> 文件，并支持中文和英文，可在 <a href="javascript:void(0)" @click="handleOpenFile('src/locale.js')">src/locale.js</a> 配置。</p>
+                </template>
+                <template v-if="formValidate.eslint">
+                    <h4>ESLint</h4>
+                    <p>使用 ESLint 来检测代码是否符合规范：</p>
+                    <code>$ npm run lint</code>
+                </template>
+                <Row class="create-app-submit create-info-submit">
+                    <i-col span="9" offset="2">
+                        <i-button type="primary" long @click="handleBackHome" icon="ios-home">返回首页</i-button>
                     </i-col>
                     <i-col span="9" offset="2">
                         <i-button type="ghost" long @click="handleOpenDirectory" style="margin-left: 8px" icon="folder">打开目录</i-button>

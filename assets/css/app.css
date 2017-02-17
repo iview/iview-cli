@@ -96,3 +96,21 @@ body{
 .create-info-submit{
     margin: 15px auto 0;
 }
+
+.create-next{
+    padding: 15px;
+}
+.create-next h4{
+    margin-bottom: 2px;
+}
+.create-next code{
+    display: block;
+    padding: 8px;
+    margin: 10px 0 8px;
+    border-radius: 4px;
+    background: #f7f7f7;
+    color: #525252;
+}
+.create-next p{
+    padding: 2px 8px;
+}

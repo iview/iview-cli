@@ -93,7 +93,7 @@ exports.createWebpackDev = function (opts) {
         const fs = require('fs');
         
         config.devtool = '#source-map';                             // source-map
-        config.output.publicPath = '/dist/';                        // 资源路径
+        config.output.publicPath = '/dist/';                       // 资源路径
         config.output.filename = '[name].js';                       // 入口js命名
         config.output.chunkFilename = '[name].chunk.js';            // 路由js命名
         
@@ -154,13 +154,14 @@ exports.createWebpackProd = function (opts) {
         )`;
 
     const webpack = `
+        const path = require('path');
         const webpack = require('webpack');
         const config = require('./webpack.base.config.js');
         const HtmlWebpackPlugin = require('html-webpack-plugin');
         const ExtractTextPlugin = require('extract-text-webpack-plugin');
         const fs = require('fs');
         
-        config.output.publicPath = path.join(__dirname, './dist/');  // 资源路径,根据需要可改为cdn地址
+        config.output.publicPath = path.join('./dist/');             // 资源路径,根据需要可改为cdn地址
         config.output.filename = '[name].[hash].js';                 // 带hash值的入口js名称
         config.output.chunkFilename = '[name].[hash].chunk.js';      // 带hash值的路由js名称
         
