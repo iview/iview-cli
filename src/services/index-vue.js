@@ -18,7 +18,7 @@ module.exports = function (opts) {
 <script>
     export default {
 
-    }
+    };
 </script>
 
 <style>

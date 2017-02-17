@@ -12,7 +12,7 @@ module.exports = function (opts) {
         data () {
             return {
                 
-            }
+            };
         },
         ready () {
 
@@ -23,7 +23,7 @@ module.exports = function (opts) {
         methods: {
 
         }
-    }
+    };
 </script>
     `;
     writeFile({
