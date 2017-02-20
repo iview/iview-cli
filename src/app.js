@@ -11,7 +11,7 @@ const app = new Vue({
     el: '#app',
     data: {
         isHidden: false,
-        version: 1,
+        version: 2,
         update: {},
         showUpdate: false
     },
@@ -33,7 +33,7 @@ const app = new Vue({
             if (constraint) {
                 msg = this.$Message.loading('正在检查更新...', 0);
             }
-            axios.get('https://raw.githubusercontent.com/iview/iview-cli/master/package.json')
+            axios.get('https://raw.githubusercontent.com/iview/iview-cli/master/package.json?' + Date.parse(new Date()))
                 .then((response) => {
                     const data = response.data;
                     if (data.update.version > this.version) {
