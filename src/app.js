@@ -29,6 +29,10 @@ const app = new Vue({
         },
         // 检查更新
         checkUpdate (constraint = false) {
+            let msg = null;
+            if (constraint) {
+                msg = this.$Message.loading('正在检查更新...', 0);
+            }
             axios.get('https://raw.githubusercontent.com/iview/iview-cli/master/package.json')
                 .then((response) => {
                     const data = response.data;
@@ -37,10 +41,13 @@ const app = new Vue({
                         this.showUpdate = true;
                     } else {
                         if (constraint) {
-                            this.$Modal.info({
-                                title: '检查更新',
-                                content: '当前已是最新版本。'
-                            })
+                            setTimeout(() => {
+                                msg();
+                                this.$Modal.info({
+                                    title: '检查更新',
+                                    content: '当前已是最新版本。'
+                                })
+                            }, 2000);
                         }
                     }
                 })
