@@ -41,8 +41,8 @@
   },
   "update": {
     "version": 2,
-    "mac": "http://www.iviewui.com/mac",
-    "windows": "http://www.iviewui.com/windows",
+    "mac": "https://github.com/iview/iview-cli/releases/download/v1.0.0/iView-cli-mac.dmg",
+    "windows": "https://github.com/iview/iview-cli/releases/download/v1.0.0/iView-cli-windows-x64.zip",
     "desc": "<li>离线文档支持 iView 1.0.0 版本</li>"
   }
 }
