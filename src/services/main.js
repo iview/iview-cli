@@ -33,7 +33,7 @@ module.exports = function (opts) {
     let storeSet = '';
 
     if (opts.data.store.indexOf('vuex') > -1) {
-        vuex = 'import Vuex from vuex;';
+        vuex = "import Vuex from 'vuex';";
         vuexUse = 'Vue.use(Vuex);';
         store = `
         const store = new Vuex.Store({

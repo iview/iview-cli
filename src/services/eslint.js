@@ -37,7 +37,8 @@ exports.createESLintRc = function (opts) {
 exports.createESLintIgnore = function (opts) {
     let file =
 `src/router.js
-src/libs/util.js`;
+src/libs/util.js
+src/vendors.js`;
     writeFile({
         directory: opts.directory,
         fileName: '.eslintignore',
