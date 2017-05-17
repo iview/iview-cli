@@ -25,17 +25,16 @@
         <div class="title" v-show="status === 'next'">iView - 进一步配置</div>
         <div class="create-app">
             <div class="create-form" v-show="status === 'options'">
-                <i-form v-ref:form-validate :model="formValidate" :rules="ruleValidate" :label-width="120">
+                <i-form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="120">
                     <Form-item label="iView 版本：" prop="iviewVersion">
-                        <Radio-group :model.sync="formValidate.iviewVersion">
-                            <Radio value="1.x">1.x</Radio>
-                            <Radio value="2.x" disabled>2.x</Radio>
+                        <Radio-group v-model="formValidate.iviewVersion">
+                            <Radio label="2.x">2.0.0-rc.13</Radio>
                         </Radio-group>
                     </Form-item>
                     <Form-item label="CSS 预处理：" prop="css">
-                        <Checkbox-group :model.sync="formValidate.css">
-                            <Checkbox value="less"></Checkbox>
-                            <Checkbox value="sass"></Checkbox>
+                        <Checkbox-group v-model="formValidate.css">
+                            <Checkbox label="less"></Checkbox>
+                            <Checkbox label="sass"></Checkbox>
                         </Checkbox-group>
                     </Form-item>
                     <Form-item label="Ajax：" prop="ajax">
@@ -46,10 +45,10 @@
                             </Tooltip>
                             <span>：</span>
                         </div>
-                        <Switch :checked.sync="formValidate.ajax">
+                        <i-switch v-model="formValidate.ajax">
                             <Icon type="android-done" slot="open"></Icon>
                             <Icon type="android-close" slot="close"></Icon>
-                        </Switch>
+                        </i-switch>
                     </Form-item>
                     <Form-item label="多语言：" prop="i18n">
                         <div slot="label">
@@ -59,34 +58,34 @@
                             </Tooltip>
                             <span>：</span>
                         </div>
-                        <Switch :checked.sync="formValidate.i18n">
+                        <i-switch v-model="formValidate.i18n">
                             <Icon type="android-done" slot="open"></Icon>
                             <Icon type="android-close" slot="close"></Icon>
-                        </Switch>
+                        </i-switch>
                     </Form-item>
                     <Form-item label="状态管理：" prop="store">
-                        <Checkbox-group :model.sync="formValidate.store">
-                            <Checkbox value="vuex"></Checkbox>
-                            <Checkbox value="bus.js"></Checkbox>
+                        <Checkbox-group v-model="formValidate.store">
+                            <Checkbox label="vuex"></Checkbox>
+                            <Checkbox label="bus.js"></Checkbox>
                         </Checkbox-group>
                     </Form-item>
                     <Form-item label="图表：" prop="chart">
-                        <Checkbox-group :model.sync="formValidate.chart">
-                            <Checkbox value="echarts"></Checkbox>
+                        <Checkbox-group v-model="formValidate.chart">
+                            <Checkbox label="echarts"></Checkbox>
                         </Checkbox-group>
                     </Form-item>
                     <Form-item label="ESLint：" prop="eslint">
-                        <Switch :checked.sync="formValidate.eslint">
+                        <i-switch v-model="formValidate.eslint">
                             <Icon type="android-done" slot="open"></Icon>
                             <Icon type="android-close" slot="close"></Icon>
-                        </Switch>
+                        </i-switch>
                     </Form-item>
                     <Form-item label="附加功能：" prop="funs">
-                        <Checkbox-group :model.sync="formValidate.funs">
-                            <Checkbox value="cookies">Cookie（js-cookie）</Checkbox>
-                            <Checkbox value="clipboard">复制（clipboard）</Checkbox>
-                            <Checkbox value="html2canvas">HTML 转图片（html2canvas）</Checkbox>
-                            <Checkbox value="rasterizehtml">HTML 转图片（rasterizeHTML）</Checkbox>
+                        <Checkbox-group v-model="formValidate.funs">
+                            <Checkbox label="cookies">Cookie（js-cookie）</Checkbox>
+                            <Checkbox label="clipboard">复制（clipboard）</Checkbox>
+                            <Checkbox label="html2canvas">HTML 转图片（html2canvas）</Checkbox>
+                            <Checkbox label="rasterizehtml">HTML 转图片（rasterizeHTML）</Checkbox>
                         </Checkbox-group>
                     </Form-item>
                     <a href="javascript:void(0)" class="create-app-more" v-if="!showMore" @click="handleShowMore">
@@ -95,16 +94,16 @@
                     </a>
                     <div class="create-app-more-item" v-if="showMore">
                         <Form-item label="项目名称：" prop="name">
-                            <i-input :value.sync="formValidate.name" placeholder="请输入项目名，推荐使用英文"></i-input>
+                            <i-input v-model="formValidate.name" placeholder="请输入项目名，必须为英文且不带空格"></i-input>
                         </Form-item>
                         <Form-item label="版本号：" prop="version">
-                            <i-input :value.sync="formValidate.version" placeholder="请输入版本号，例如 1.0.0"></i-input>
+                            <i-input v-model="formValidate.version" placeholder="请输入版本号，例如 1.0.0"></i-input>
                         </Form-item>
                         <Form-item label="项目介绍：" prop="desc">
-                            <i-input type="textarea" :value.sync="formValidate.desc" placeholder="请输入项目介绍..."></i-input>
+                            <i-input type="textarea" v-model="formValidate.desc" placeholder="请输入项目介绍..."></i-input>
                         </Form-item>
                         <Form-item label="Git 地址：" prop="git">
-                            <i-input :value.sync="formValidate.git" placeholder="请输入项目所在仓库地址"></i-input>
+                            <i-input v-model="formValidate.git" placeholder="请输入项目所在仓库地址"></i-input>
                         </Form-item>
                     </div>
                 </i-form>
@@ -119,9 +118,11 @@
             </div>
             <div class="create-info" v-show="status === 'log'">
                 <log :status="log.package" content="创建 package.json"></log>
+                <log :status="log.babel" content="创建 .babelrc"></log>
                 <log :status="log.webpackBase" content="创建 webpack 基础配置文件"></log>
                 <log :status="log.webpackDev" content="创建 webpack 开发环境配置文件"></log>
                 <log :status="log.webpackProd" content="创建 webpack 生产环境配置文件"></log>
+                <log :status="log.vendors" content="创建 vendors.js"></log>
                 <log :status="log.router" content="创建路由配置文件 router.js"></log>
                 <log :status="log.i18n" content="创建多语言配置文件 locale.js" v-if="formValidate.i18n"></log>
                 <log :status="log.app" content="创建路由挂载根组件 app.vue"></log>
@@ -131,9 +132,9 @@
                 <log :status="log.main" content="创建入口文件 main.js"></log>
                 <log :status="log.config" content="创建配置文件 config.js"></log>
                 <log :status="log.util" content="创建工具集文件 util.js"></log>
-                <log :status="log.vuexStore" content="创建 vuex 文件 store.js" v-if="formValidate.store.indexOf('vuex') > -1"></log>
-                <log :status="log.vuexActions" content="创建 vuex 文件 actions.js" v-if="formValidate.store.indexOf('vuex') > -1"></log>
-                <log :status="log.vuexMutations" content="创建 vuex 文件 mutations.js" v-if="formValidate.store.indexOf('vuex') > -1"></log>
+                <!--<log :status="log.vuexStore" content="创建 vuex 文件 store.js" v-if="formValidate.store.indexOf('vuex') > -1"></log>-->
+                <!--<log :status="log.vuexActions" content="创建 vuex 文件 actions.js" v-if="formValidate.store.indexOf('vuex') > -1"></log>-->
+                <!--<log :status="log.vuexMutations" content="创建 vuex 文件 mutations.js" v-if="formValidate.store.indexOf('vuex') > -1"></log>-->
                 <log :status="log.bus" content="创建中央事件总线文件 bus.js" v-if="formValidate.store.indexOf('bus.js') > -1"></log>
                 <log :status="log.eslintRc" content="创建 ESLint 配置文件 .eslintrc.json" v-if="formValidate.eslint"></log>
                 <log :status="log.eslintIgnore" content="创建 ESLint 忽略文件 .eslintignore" v-if="formValidate.eslint"></log>

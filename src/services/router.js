@@ -2,13 +2,15 @@ const writeFile = require('./write-file');
 
 module.exports = function (opts) {
     const file = `
-        const routers = {
-            '/index': {
-                component (resolve) {
-                    require(['./views/index.vue'], resolve);
-                }
+        const routers = [
+            {
+                path: '/',
+                meta: {
+                    title: ''
+                },
+                component: (resolve) => require(['./views/index.vue'], resolve)
             }
-        };
+        ];
         export default routers;
     `;
     writeFile({

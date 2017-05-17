@@ -37,6 +37,7 @@ const app = new Vue({
                 .then((response) => {
                     const data = response.data;
                     if (data.update.version > this.version) {
+                        msg();
                         this.update = data.update;
                         this.showUpdate = true;
                     } else {
@@ -51,12 +52,9 @@ const app = new Vue({
                         }
                     }
                 })
-                .catch((error) => {
-
-                });
         },
         handleOk () {
-            if (process.platform == 'darwin') {
+            if (process.platform === 'darwin') {
                 shell.openExternal(this.update.mac);
             } else {
                 shell.openExternal(this.update.windows);
@@ -66,7 +64,7 @@ const app = new Vue({
 
         }
     },
-    ready () {
+    mounted () {
         this.checkUpdate();
     }
 });

@@ -47,7 +47,7 @@ function createMenu () {
             label: app.getName(),
             submenu: [
                 {
-                    label: '关于 iView',
+                    label: '关于 iView Cli',
                     click () {
                         if (win_about == null) {
                             win_about = new BrowserWindow({

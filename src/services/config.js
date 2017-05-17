@@ -3,7 +3,7 @@ const writeFile = require('./write-file');
 module.exports = function (opts) {
     const file = `
         import Env from './env';
-        
+
         let config = {
             env: Env
         };

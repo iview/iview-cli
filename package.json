@@ -1,6 +1,6 @@
 {
   "name": "iview-cli",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "title": "iView Cli",
   "description": "Quick way to create an iView project.",
   "homepage": "http://www.iviewui.com",
@@ -31,9 +31,9 @@
   },
   "dependencies": {
     "axios": "^0.15.3",
-    "iview": "^0.9.17",
+    "iview": "^2.0.0-rc.13",
     "js-beautify": "^1.6.9",
-    "vue": "^1.0.28"
+    "vue": "^2.2.6"
   },
   "devDependencies": {
     "electron-packager": "^8.5.1",
