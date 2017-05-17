@@ -2,24 +2,41 @@ const writeFile = require('./write-file');
 
 exports.createWebpackBase = function (opts) {
     let css = '';
-    if (opts.data.css.indexOf('less') > -1) css += `
-    {
-        test: /\\.less/,
-        use: ExtractTextPlugin.extract({
-            use: ['autoprefixer-loader', 'less-loader'],
-            fallback: 'style-loader'
-        })
-    },
-    `;
-    if (opts.data.css.indexOf('sass') > -1) css += `
-    {
-        test: /\\.sass/,
-        use: ExtractTextPlugin.extract({
-            use: ['autoprefixer-loader', 'sass-loader'],
-            fallback: 'style-loader'
-        })
-    },
-    `;
+    let vueCss = '';
+    if (opts.data.css.indexOf('less') > -1) {
+        css += `
+        {
+            test: /\\.less/,
+            use: ExtractTextPlugin.extract({
+                use: ['autoprefixer-loader', 'less-loader'],
+                fallback: 'style-loader'
+            })
+        },
+        `;
+        vueCss += `
+            less: ExtractTextPlugin.extract({
+                use: ['css-loader?minimize', 'autoprefixer-loader', 'less-loader'],
+                fallback: 'vue-style-loader'
+            }),
+        `;
+    }
+    if (opts.data.css.indexOf('sass') > -1) {
+        css += `
+        {
+            test: /\\.sass/,
+            use: ExtractTextPlugin.extract({
+                use: ['autoprefixer-loader', 'sass-loader'],
+                fallback: 'style-loader'
+            })
+        },
+        `;
+        vueCss += `
+            sass: ExtractTextPlugin.extract({
+                use: ['css-loader?minimize', 'autoprefixer-loader', 'sass-loader'],
+                fallback: 'vue-style-loader'
+            }),
+        `;
+    }
 
     const webpack = `
         const path = require('path');
@@ -41,12 +58,9 @@ exports.createWebpackBase = function (opts) {
                         loader: 'vue-loader',
                         options: {
                             loaders: {
-                                less: ExtractTextPlugin.extract({
-                                    use: ['css-loader?minimize', 'autoprefixer-loader', 'less-loader'],
-                                    fallback: 'vue-style-loader'
-                                }),
+                                ${vueCss}
                                 css: ExtractTextPlugin.extract({
-                                    use: ['css-loader', 'autoprefixer-loader', 'less-loader'],
+                                    use: ['css-loader', 'autoprefixer-loader'],
                                     fallback: 'vue-style-loader'
                                 })
                             }

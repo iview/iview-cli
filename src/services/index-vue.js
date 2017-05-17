@@ -2,7 +2,7 @@ const writeFile = require('./write-file');
 
 module.exports = function (opts) {
     const file = `
-<style scoped lang="less">
+<style scoped>
     .index{
         width: 100%;
         position: absolute;
@@ -10,22 +10,22 @@ module.exports = function (opts) {
         bottom: 0;
         left: 0;
         text-align: center;
-        h1{
-            height: 150px;
-            img{
-                height: 100%;
-            }
-        }
-        h2{
-            color: #666;
-            margin-bottom: 200px;
-            p{
-                margin: 0 0 50px;
-            }
-        }
-        .ivu-row-flex{
-            height: 100%;
-        }
+    }
+    .index h1{
+        height: 150px;
+    }
+    .index h1 img{
+        height: 100%;
+    }
+    .index h2{
+        color: #666;
+        margin-bottom: 200px;
+    }
+    .index h2 p{
+        margin: 0 0 50px;
+    }
+    .index .ivu-row-flex{
+        height: 100%;
     }
 </style>
 <template>
