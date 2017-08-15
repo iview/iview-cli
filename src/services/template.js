@@ -9,7 +9,7 @@ module.exports = function (opts) {
 <head>
     <title>iView project</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
     <link rel="stylesheet" href="<%= htmlWebpackPlugin.files.css[0] %>">
 </head>
 <body>
