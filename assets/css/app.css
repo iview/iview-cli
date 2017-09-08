@@ -114,3 +114,18 @@ body{
 .create-next p{
     padding: 2px 8px;
 }
+
+.lang-setting-con{
+    width: 100px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    text-align: center;
+}
+.lang-setting-con button{
+    text-align: center;
+}
+.newLine{
+    display: block;
+    margin-left: 18px;
+}

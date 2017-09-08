@@ -9,29 +9,29 @@
 </head>
 <body>
     <div id="app" v-cloak>
-        <div class="title" v-show="status === 'options'">iView - 新建工程</div>
+        <div class="title" v-show="status === 'options'">iView - {{ $t("message.newProject") }}</div>
         <div class="title" v-show="status === 'log' && titleStatus === 1">
-            iView - 创建中
+            iView - {{ $t("message.creating") }}
             <Icon type="load-c" class="ivu-load-loop"></Icon>
         </div>
         <div class="title" v-show="status === 'log' && titleStatus === 2">
-            iView - 创建完成
+            iView - {{ $t("message.createDone") }}
             <Icon type="ios-checkmark-outline" color="#00cc66"></Icon>
         </div>
         <div class="title" v-show="status === 'log' && titleStatus === 3">
-            iView - 创建失败
+            iView - {{ $t("message.creatingError") }}
             <Icon type="ios-close-outline"  color="#ff5500"></Icon>
         </div>
-        <div class="title" v-show="status === 'next'">iView - 进一步配置</div>
+        <div class="title" v-show="status === 'next'">iView - {{ $t("message.moreConf") }}</div>
         <div class="create-app">
             <div class="create-form" v-show="status === 'options'">
-                <i-form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="120">
-                    <Form-item label="iView 版本：" prop="iviewVersion">
+                <i-form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="110">
+                    <Form-item :label="'iView '+$t('message.version')+'：'" prop="iviewVersion">
                         <Radio-group v-model="formValidate.iviewVersion">
-                            <Radio label="2.x">2.0.0-rc.13</Radio>
+                            <Radio label="2.x">2.x-rc.13</Radio>
                         </Radio-group>
                     </Form-item>
-                    <Form-item label="CSS 预处理：" prop="css">
+                    <Form-item :label="'CSS '+$t('message.pretreatment')+'：'" prop="css">
                         <Checkbox-group v-model="formValidate.css">
                             <Checkbox label="less"></Checkbox>
                             <Checkbox label="sass"></Checkbox>
@@ -40,7 +40,7 @@
                     <Form-item label="Ajax：" prop="ajax">
                         <div slot="label">
                             <span>Ajax</span>
-                            <Tooltip content="基于 axios">
+                            <Tooltip :content="$t('message.basedOn')+' axios'">
                                 <Icon type="ios-help" size="14" color="#3399ff"></Icon>
                             </Tooltip>
                             <span>：</span>
@@ -50,10 +50,10 @@
                             <Icon type="android-close" slot="close"></Icon>
                         </i-switch>
                     </Form-item>
-                    <Form-item label="多语言：" prop="i18n">
+                    <Form-item :label="$t('message.multilingual')+'：'" prop="i18n">
                         <div slot="label">
-                            <span>多语言</span>
-                            <Tooltip content="基于 vue-i18n">
+                            <span>{{ $t('message.multilingual') }}</span>
+                            <Tooltip :content="$t('message.basedOn')+' vue-i18n'">
                                 <Icon type="ios-help" size="14" color="#3399ff"></Icon>
                             </Tooltip>
                             <span>：</span>
@@ -63,13 +63,13 @@
                             <Icon type="android-close" slot="close"></Icon>
                         </i-switch>
                     </Form-item>
-                    <Form-item label="状态管理：" prop="store">
+                    <Form-item :label="$t('message.stateManagement')+'：'" prop="store">
                         <Checkbox-group v-model="formValidate.store">
                             <Checkbox label="vuex"></Checkbox>
                             <Checkbox label="bus.js"></Checkbox>
                         </Checkbox-group>
                     </Form-item>
-                    <Form-item label="图表：" prop="chart">
+                    <Form-item :label="$t('message.charts')+'：'" prop="chart">
                         <Checkbox-group v-model="formValidate.chart">
                             <Checkbox label="echarts"></Checkbox>
                         </Checkbox-group>
@@ -80,73 +80,70 @@
                             <Icon type="android-close" slot="close"></Icon>
                         </i-switch>
                     </Form-item>
-                    <Form-item label="附加功能：" prop="funs">
+                    <Form-item :label="$t('message.others')+'：'" prop="funs">
                         <Checkbox-group v-model="formValidate.funs">
                             <Checkbox label="cookies">Cookie（js-cookie）</Checkbox>
-                            <Checkbox label="clipboard">复制（clipboard）</Checkbox>
-                            <Checkbox label="html2canvas">HTML 转图片（html2canvas）</Checkbox>
-                            <Checkbox label="rasterizehtml">HTML 转图片（rasterizeHTML）</Checkbox>
+                            <Checkbox label="clipboard">{{ $t('message.copy') }}（clipboard）</Checkbox>
+                            <Checkbox label="html2canvas">{{ $t('message.html2canvas') }}(html2canvas)</Checkbox>
+                            <Checkbox label="rasterizehtml">{{ $t('message.rasterizeHtml') }}(rasterizeHTML)</Checkbox>
                         </Checkbox-group>
                     </Form-item>
                     <a href="javascript:void(0)" class="create-app-more" v-if="!showMore" @click="handleShowMore">
-                        <span>显示更多配置</span>
+                        <span>{{ $t('message.showMoreConf') }}</span>
                         <Icon type="ios-arrow-down"></Icon>
                     </a>
                     <div class="create-app-more-item" v-if="showMore">
-                        <Form-item label="项目名称：" prop="name">
-                            <i-input v-model="formValidate.name" placeholder="请输入项目名，必须为英文且不带空格"></i-input>
+                        <Form-item :label="$t('message.projectName')+'：'" prop="name">
+                            <i-input v-model="formValidate.name" :placeholder="$t('message.projectNamePlaceholder')"></i-input>
                         </Form-item>
-                        <Form-item label="版本号：" prop="version">
-                            <i-input v-model="formValidate.version" placeholder="请输入版本号，例如 1.0.0"></i-input>
+                        <Form-item :label="$t('message.versionUpercase')+'：'" prop="version">
+                            <i-input v-model="formValidate.version" :placeholder="$t('message.versionPlaceholder')"></i-input>
                         </Form-item>
-                        <Form-item label="项目介绍：" prop="desc">
-                            <i-input type="textarea" v-model="formValidate.desc" placeholder="请输入项目介绍..."></i-input>
+                        <Form-item :label="$t('message.projectIntro')+'：'" prop="desc">
+                            <i-input type="textarea" v-model="formValidate.desc" :placeholder="$t('message.projectIntroPlaceholder')+'...'"></i-input>
                         </Form-item>
-                        <Form-item label="Git 地址：" prop="git">
-                            <i-input v-model="formValidate.git" placeholder="请输入项目所在仓库地址"></i-input>
+                        <Form-item :label="'Git '+$t('message.link')+'：'" prop="git">
+                            <i-input v-model="formValidate.git" :placeholder="$t('message.gitLinkPlaceholder')"></i-input>
                         </Form-item>
                     </div>
                 </i-form>
                 <Row class="create-app-submit">
-                    <i-col span="9" offset="2">
-                        <i-button type="primary" long @click="handleSubmit('formValidate')">创建工程</i-button>
+                    <i-col span="11" offset="2">
+                        <i-button type="primary" long @click="handleSubmit('formValidate')">{{ $t('message.createProject') }}</i-button>
                     </i-col>
-                    <i-col span="9" offset="2">
-                        <i-button type="ghost" long @click="handleReset('formValidate')" style="margin-left: 8px">重置</i-button>
+                    <i-col span="10" offset="1">
+                        <i-button type="ghost" long @click="handleReset('formValidate')" style="margin-left: 8px">{{ $t('message.reset') }}</i-button>
                     </i-col>
                 </Row>
             </div>
             <div class="create-info" v-show="status === 'log'">
-                <log :status="log.package" content="创建 package.json"></log>
-                <log :status="log.babel" content="创建 .babelrc"></log>
-                <log :status="log.webpackBase" content="创建 webpack 基础配置文件"></log>
-                <log :status="log.webpackDev" content="创建 webpack 开发环境配置文件"></log>
-                <log :status="log.webpackProd" content="创建 webpack 生产环境配置文件"></log>
-                <log :status="log.vendors" content="创建 vendors.js"></log>
-                <log :status="log.router" content="创建路由配置文件 router.js"></log>
-                <log :status="log.i18n" content="创建多语言配置文件 locale.js" v-if="formValidate.i18n"></log>
-                <log :status="log.app" content="创建路由挂载根组件 app.vue"></log>
-                <log :status="log.template" content="创建首页模板 index.ejs"></log>
-                <log :status="log.indexHtml" content="创建首页 index.html"></log>
-                <log :status="log.indexVue" content="创建首页组件 index.vue"></log>
-                <log :status="log.main" content="创建入口文件 main.js"></log>
-                <log :status="log.config" content="创建配置文件 config.js"></log>
-                <log :status="log.util" content="创建工具集文件 util.js"></log>
-                <!--<log :status="log.vuexStore" content="创建 vuex 文件 store.js" v-if="formValidate.store.indexOf('vuex') > -1"></log>-->
-                <!--<log :status="log.vuexActions" content="创建 vuex 文件 actions.js" v-if="formValidate.store.indexOf('vuex') > -1"></log>-->
-                <!--<log :status="log.vuexMutations" content="创建 vuex 文件 mutations.js" v-if="formValidate.store.indexOf('vuex') > -1"></log>-->
-                <log :status="log.bus" content="创建中央事件总线文件 bus.js" v-if="formValidate.store.indexOf('bus.js') > -1"></log>
-                <log :status="log.eslintRc" content="创建 ESLint 配置文件 .eslintrc.json" v-if="formValidate.eslint"></log>
-                <log :status="log.eslintIgnore" content="创建 ESLint 忽略文件 .eslintignore" v-if="formValidate.eslint"></log>
-                <log :status="log.gitignore" content="创建 .gitignore"></log>
-                <log :status="log.editorconfig" content="创建 .editorconfig"></log>
+                <log :status="log.package" :content="$t('message.create')+' package.json'"></log>
+                <log :status="log.babel" :content="$t('message.create')+' .babelrc'"></log>
+                <log :status="log.webpackBase" :content="$t('message.create')+' webpack '+$t('message.basicConfFile')"></log>
+                <log :status="log.webpackDev" :content="$t('message.create')+' webpack '+$t('message.devConfFile')"></log>
+                <log :status="log.webpackProd" :content="$t('message.create')+' webpack '+$t('message.proConfFile')"></log>
+                <log :status="log.vendors" :content="$t('message.create')+' vendors.js'"></log>
+                <log :status="log.router" :content="$t('message.create')+' '+$t('message.routerConfFile')+' router.js'"></log>
+                <log :status="log.i18n" :content="$t('message.create')+' '+$t('message.multilingualConfFile')+' locale.js'" v-if="formValidate.i18n"></log>
+                <log :status="log.app" :content="$t('message.create')+' '+$t('message.routerMountRootComponent')+' app.vue'"></log>
+                <log :status="log.template" :content="$t('message.create')+' '+$t('message.indexTemplate')+' index.ejs'"></log>
+                <log :status="log.indexHtml" :content="$t('message.create')+' '+$t('message.index')+' index.html'"></log>
+                <log :status="log.indexVue" :content="$t('message.create')+' '+$t('message.indexComponent')+' index.vue'"></log>
+                <log :status="log.main" :content="$t('message.create')+' '+$t('message.mainFile')+' main.js'"></log>
+                <log :status="log.config" :content="$t('message.create')+' '+$t('message.confFile')+' config.js'"></log>
+                <log :status="log.util" :content="$t('message.create')+' '+$t('message.toolsetFile')+' util.js'"></log>
+                <log :status="log.bus" :content="$t('message.create')+' '+$t('message.centralEventBusFile')+' bus.js'" v-if="formValidate.store.indexOf('bus.js') > -1"></log>
+                <log :status="log.eslintRc" :content="$t('message.create')+' ESLint '+$t('message.confFile')+' .eslintrc.json'" v-if="formValidate.eslint"></log>
+                <log :status="log.eslintIgnore" :content="$t('message.create')+' ESLint '+$t('message.ignoreFile')+' .eslintignore'" v-if="formValidate.eslint"></log>
+                <log :status="log.gitignore" :content="$t('message.create')+' .gitignore'"></log>
+                <log :status="log.editorconfig" :content="$t('message.create')+' .editorconfig'"></log>
 
                 <Row class="create-app-submit create-info-submit">
-                    <i-col span="9" offset="2">
-                        <i-button type="success" long @click="handleNext" icon="ios-information" :disabled="titleStatus !== 2">进一步配置</i-button>
+                    <i-col span="12" offset="1">
+                        <i-button type="success" long @click="handleNext" icon="ios-information" :disabled="titleStatus !== 2">{{ $t('message.furtherConf') }}</i-button>
                     </i-col>
-                    <i-col span="9" offset="2">
-                        <i-button type="ghost" long @click="handleOpenDirectory" style="margin-left: 8px" icon="folder">打开目录</i-button>
+                    <i-col span="10" offset="0">
+                        <i-button type="ghost" long @click="handleOpenDirectory" style="margin-left: 8px" icon="folder">{{ $t('message.openDirectory') }}</i-button>
                     </i-col>
                 </Row>
             </div>
@@ -154,41 +151,41 @@
                 <Alert show-icon>
                     <Icon type="ios-lightbulb-outline" slot="icon"></Icon>
                     <span slot="desc">
-                        iView Cli 已将所有配置文件保存在指定的<a href="javascript:void(0)" @click="handleOpenDirectory">目录</a>，按照下面的流程可以启动项目。对于一些定制内容，可以进一步配置。
+                        iView Cli {{ $t('message.hasSaveAt') }}<a href="javascript:void(0)" @click="handleOpenDirectory">&nbsp;{{ $t('message.directory') }}</a>，{{ $t('message.whatToDoNext') }}
                     </span>
                 </Alert>
-                <Alert>请预先全局安装 Node.js、npm 、webpack。</Alert>
-                <h4>安装依赖</h4>
+                <Alert>{{ $t('message.installSomeToolsFirst') }}</Alert>
+                <h4>{{ $t('message.installDependencies') }}</h4>
                 <code>$ npm install</code>
-                <h4>启动服务（开发环境）</h4>
+                <h4>{{ $t('message.startService') }}</h4>
                 <code>$ npm run dev</code>
                 <p>
-                    服务启动后，打开 <a href="javascript:void(0)" @click="handleOpenLink('http://127.0.0.1:8080')">http://127.0.0.1:8080</a> 访问网站
+                    {{ $t('message.openWebsiteLeftText') }}&nbsp;<a href="javascript:void(0)" @click="handleOpenLink('http://127.0.0.1:8080')">http://127.0.0.1:8080</a> {{ $t('message.openWebsiteRightText') }}
                 </p>
                 <p></p>
-                <h4>编译打包（生产环境）</h4>
+                <h4>{{ $t('message.compileAndPackage') }}</h4>
                 <code>$ npm run build</code>
                 <template v-if="formValidate.ajax">
-                    <h4>配置 Ajax</h4>
-                    <p>iView 使用 <strong>axios</strong> 完成 Ajax 请求，并且将其封装在了 <a href="javascript:void(0)" @click="handleOpenFile('src/libs/util.js')">src/libs/util.js</a> 里，点击文件修改具体配置。</p>
+                    <h4>{{ $t('message.config') }} Ajax</h4>
+                    <p>iView {{ $t('message.axiosLeftText') }} <strong>axios</strong> {{ $t('message.axiosMiddleText') }} <a href="javascript:void(0)" @click="handleOpenFile('src/libs/util.js')">src/libs/util.js</a> {{ $t('message.axiosRightText') }}</p>
                 </template>
-                <h4>修改 html 模板</h4>
-                <p>修改 <a href="javascript:void(0)" @click="handleOpenFile('src/template/index.ejs')">src/template/index.ejs</a> 文件，使用 webpack 重新编译，可以改变入口 html。</p>
+                <h4>{{ $t('message.modifyHtmlTemplate') }}</h4>
+                <p>{{ $t('message.modifyIndexLeftText') }} <a href="javascript:void(0)" @click="handleOpenFile('src/template/index.ejs')">src/template/index.ejs</a> {{ $t('message.modifyIndexRightText') }}</p>
                 <template v-if="formValidate.i18n">
-                    <h4>多语言</h4>
-                    <p>iView 已预先将多语言配置写入 <a href="javascript:void(0)" @click="handleOpenFile('src/main.js')">src/main.js</a> 文件，并支持中文和英文，可在 <a href="javascript:void(0)" @click="handleOpenFile('src/locale.js')">src/locale.js</a> 配置。</p>
+                    <h4>{{ $t('message.multilingual') }}</h4>
+                    <p>iView {{ $t('message.multiLanguageConfLeftText') }} <a href="javascript:void(0)" @click="handleOpenFile('src/main.js')">src/main.js</a> {{ $t('message.multiLanguageConfMiddleText') }} <a href="javascript:void(0)" @click="handleOpenFile('src/locale.js')">src/locale.js</a> {{ $t('message.multiLanguageConfRightText') }}</p>
                 </template>
                 <template v-if="formValidate.eslint">
                     <h4>ESLint</h4>
-                    <p>使用 ESLint 来检测代码是否符合规范：</p>
+                    <p>{{ $t('message.useESLint') }}：</p>
                     <code>$ npm run lint</code>
                 </template>
                 <Row class="create-app-submit create-info-submit">
-                    <i-col span="9" offset="2">
-                        <i-button type="primary" long @click="handleBackHome" icon="ios-home">返回首页</i-button>
+                    <i-col span="10" offset="2">
+                        <i-button type="primary" long @click="handleBackHome" icon="ios-home">{{ $t('message.backHome') }}</i-button>
                     </i-col>
-                    <i-col span="9" offset="2">
-                        <i-button type="ghost" long @click="handleOpenDirectory" style="margin-left: 8px" icon="folder">打开目录</i-button>
+                    <i-col span="10" offset="2">
+                        <i-button type="ghost" long @click="handleOpenDirectory" style="margin-left: 8px" icon="folder">{{ $t('message.openDirectory') }}</i-button>
                     </i-col>
                 </Row>
             </div>
@@ -196,6 +193,7 @@
     </div>
     <script type="text/javascript" src="../assets/js/vue.min.js"></script>
     <script type="text/javascript" src="../assets/js/iview.min.js"></script>
+    <script type="text/javascript" src="../assets/js/vue-i18n.js"></script>
     <script type="text/javascript" src="../src/create.js"></script>
 </body>
 </html>

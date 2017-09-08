@@ -31,13 +31,16 @@
   },
   "dependencies": {
     "axios": "^0.15.3",
+    "electron-connect": "^0.6.2",
     "iview": "^2.0.0-rc.13",
     "js-beautify": "^1.6.9",
     "vue": "^2.2.6"
   },
   "devDependencies": {
-    "electron-packager": "^8.7.0",
-    "electron-prebuilt": "^1.4.13"
+    "electron-packager": "^8.7.2",
+    "electron-prebuilt": "^1.4.13",
+    "gulp": "^3.9.1",
+    "vue-i18n": "^5.0.3"
   },
   "update": {
     "version": 3,

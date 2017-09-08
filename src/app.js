@@ -7,13 +7,38 @@ const ipcMain = electron.ipcMain;
 const axios = require('axios');
 const shell = electron.shell;
 
+const zhLang = require('../assets/lang/zh').zhLang;
+const enLang = require('../assets/lang/en').enLang;
+const i18n = require('vue-i18n');
+let locales = {
+    en: {
+        message: enLang
+    },
+    zh: {
+        message: zhLang
+    }
+}
+
+const fs = require('fs');
+const path = require('path');
+let _path = path.join(__dirname, '..', 'conf\\lang.json');
+let getLang = fs.readFileSync(_path);
+let language = getLang?JSON.parse(getLang): { lang: 'zh', message: 'EN' };
+Vue.config.lang = language.lang;
+
+
+Object.keys(locales).forEach(function(lang){
+    Vue.locale(lang, locales[lang])
+})
+
 const app = new Vue({
     el: '#app',
     data: {
         isHidden: false,
         version: 2,
         update: {},
-        showUpdate: false
+        showUpdate: false,
+        language: language
     },
     methods: {
         handleCreateApp () {
@@ -31,7 +56,7 @@ const app = new Vue({
         checkUpdate (constraint = false) {
             let msg = null;
             if (constraint) {
-                msg = this.$Message.loading('正在检查更新...', 0);
+                msg = this.$Message.loading( app.$t('message.checkingUpdates') + '...', 0);
             }
             axios.get('https://raw.githubusercontent.com/iview/iview-cli/master/package.json?' + Date.parse(new Date()))
                 .then((response) => {
@@ -45,8 +70,9 @@ const app = new Vue({
                             setTimeout(() => {
                                 msg();
                                 this.$Modal.info({
-                                    title: '检查更新',
-                                    content: '当前已是最新版本。'
+                                    title: app.$t('message.intro'),
+                                    content: app.$t('message.isLatestVersion'),
+                                    okText: app.$t('message.ok')
                                 })
                             }, 2000);
                         }
@@ -62,6 +88,11 @@ const app = new Vue({
         },
         handleCancel () {
 
+        },
+        changeLauage () {
+            Vue.config.lang = this.language.lang === 'zh'? 'en': 'zh';
+            this.language = this.language.lang === 'zh'? { lang: "en", message: "中文" }: { lang: "zh", message: "EN" };
+            fs.writeFile(_path, JSON.stringify(app.language), function(err){})
         }
     },
     mounted () {
