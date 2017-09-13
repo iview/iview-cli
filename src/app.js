@@ -21,9 +21,9 @@ let locales = {
 
 const fs = require('fs');
 const path = require('path');
-let _path = path.join(__dirname, '..', 'conf\\lang.json');
+let _path = path.join(__dirname, '../conf/lang.json');
 let getLang = fs.readFileSync(_path);
-let language = getLang?JSON.parse(getLang): { lang: 'zh', message: 'EN' };
+let language = getLang?JSON.parse(getLang):{ lang: 'zh', message: 'EN' };
 Vue.config.lang = language.lang;
 
 

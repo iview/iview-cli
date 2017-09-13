@@ -116,7 +116,7 @@ body{
 }
 
 .lang-setting-con{
-    width: 100px;
+    width: 50px;
     position: absolute;
     right: 10px;
     top: 10px;
@@ -124,8 +124,4 @@ body{
 }
 .lang-setting-con button{
     text-align: center;
-}
-.newLine{
-    display: block;
-    margin-left: 18px;
 }

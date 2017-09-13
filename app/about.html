@@ -18,6 +18,11 @@
         }
     </style>
     <script type="text/javascript">
+        const path = require('path');
+        const fs = require('fs');
+        let _path = path.join(__dirname, '../conf/lang.json');
+        let data = fs.readFileSync(_path);
+        document.title = data.lang==="zh"?"关于 iView Cli":"About iView Cli";
         function openLink(event) {
             event.preventDefault();
             require('electron').shell.openExternal('https://github.com/iview/iview-cli');

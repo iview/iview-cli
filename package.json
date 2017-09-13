@@ -15,7 +15,7 @@
     "start": "electron main.js",
     "build:linux32": "electron-packager ./ iView --platform=linux --arch=ia32 ~/Desktop/iView --electronVersion=1.4.15 --overwrite --icon=./assets/img/iView.icns",
     "build:linux64": "electron-packager ./ iView --platform=linux --arch=x64 ~/Desktop/iView --electronVersion=1.4.15 --overwrite --icon=./assets/img/iView.icns",
-    "build:mac": "electron-packager ./ iView --platform=darwin --arch=x64 ~/Desktop/iView --electronVersion=1.4.15 --overwrite --icon=./assets/img/iView.icns",
+    "build:mac": "electron-packager ./ iView --platform=darwin --arch=x64 ~/Desktop/iView --electronVersion=1.7.6 --overwrite --icon=./assets/img/iView.icns",
     "build:win32": "electron-packager ./ iView --platform=win32 --arch=ia32 ~/Desktop/iView --electronVersion=1.4.15 --overwrite --icon=./assets/img/iView.icns",
     "build:win64": "electron-packager ./ iView --platform=win32 --arch=x64 ~/Desktop/iView --electronVersion=1.4.15 --overwrite --icon=./assets/img/iView.icns",
     "appdmg": "appdmg appdmg.json ~/Desktop/iView.dmg"
@@ -30,13 +30,19 @@
     "url": "https://github.com/iview/iview-cli/issues"
   },
   "dependencies": {
+    "ajv": "^5.2.2",
+    "ajv-keywords": "^2.1.0",
     "axios": "^0.15.3",
-    "electron-connect": "^0.6.2",
+    "cnpm": "^5.1.1",
+    "electron-builder": "^19.27.7",
     "iview": "^2.0.0-rc.13",
     "js-beautify": "^1.6.9",
-    "vue": "^2.2.6"
+    "vue": "^2.2.6",
+    "vue-i18n": "^5.0.3"
   },
   "devDependencies": {
+    "electron": "^1.7.6",
+    "electron-connect": "^0.6.2",
     "electron-packager": "^8.7.2",
     "electron-prebuilt": "^1.4.13",
     "gulp": "^3.9.1",

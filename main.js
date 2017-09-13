@@ -11,15 +11,15 @@ let willClose = false;
 
 function createWindow () {
     win = new BrowserWindow({
-        // width: 360,
-        width: 1000,
-        // height: 572,
-        height: 700,
+        width: 360,
+        // width: 1000,
+        height: 572,
+        // height: 700,
         title: 'iView',
-        y:200,
-        x:20,
+        // y:200,
+        // x:20,
         center: true,
-        resizable: true,
+        resizable: false,
         icon: logo,
         titleBarStyle: 'hidden'
     });
@@ -44,8 +44,6 @@ function createWindow () {
         win = null;
     });
 }
-
-// let lang = JSON.parse(localStorage.language).lang;
 
 function createMenu (language) {
     const template = [
@@ -91,9 +89,9 @@ function createMenu (language) {
 }
 
 app.on('ready', () => {
-    let _path = path.join(__dirname, 'conf\\lang.json');
+    let _path = path.join(__dirname, './conf/lang.json');
     let data = fs.readFileSync(_path);
-    let language = data?JSON.parse(data): { lang: 'zh', message: 'EN' };
+    let language = data?JSON.parse(data):{ lang: 'zh', message: 'EN' };
     createWindow();
     createMenu(language);
 });

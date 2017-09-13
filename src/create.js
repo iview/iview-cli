@@ -20,7 +20,7 @@ let locales = {
     }
 }
 
-let _path = path.join(__dirname, '..', 'conf\\lang.json');
+let _path = path.join(__dirname, '../conf/lang.json');
 let getLang = fs.readFileSync(_path);
 let language = getLang? JSON.parse(getLang): { lang: 'zh', message: 'EN' };
 Vue.config.lang = language.lang;
@@ -110,8 +110,6 @@ const app = new Vue({
             editorconfig: 1
         },
         language: language,
-        // labelWidth: localStorage.language? (JSON.parse(localStorage.language).lang==="zh"? 120: 140) : 120,
-        // isNewLine: localStorage.language? JSON.parse(localStorage.language).lang==='en': false,
     },
     computed: {
         titleStatus () {
