@@ -6,6 +6,29 @@ const dialog = remote.dialog;
 const shell = electron.shell;
 
 const fs = require('fs');
+const path = require('path');
+
+const zhLang = require('../assets/lang/zh').zhLang;
+const enLang = require('../assets/lang/en').enLang;
+const i18n = require('vue-i18n');
+let locales = {
+    en: {
+        message: enLang
+    },
+    zh: {
+        message: zhLang
+    }
+}
+
+let _path = path.join(__dirname, '../conf/lang.json');
+let getLang = fs.readFileSync(_path);
+let language = getLang? JSON.parse(getLang): { lang: 'zh', message: 'EN' };
+Vue.config.lang = language.lang;
+ 
+Object.keys(locales).forEach(function(lang){
+    Vue.locale(lang, locales[lang])
+})
+
 const createPackage = require('../src/services/package');
 const createBabel = require('../src/services/babel');
 const { createWebpackBase, createWebpackDev, createWebpackProd } = require('../src/services/webpack');
@@ -85,7 +108,8 @@ const app = new Vue({
             eslintIgnore: 1,
             gitignore: 1,
             editorconfig: 1
-        }
+        },
+        language: language,
     },
     computed: {
         titleStatus () {
@@ -120,7 +144,7 @@ const app = new Vue({
             this.$refs[name].validate((valid) => {
                 if (valid) {
                     saveDirectory = dialog.showOpenDialog(win, {
-                        title: '选择工程保存目录',
+                        title: app.$t('message.selectDir'),
                         properties: ['openDirectory', 'createDirectory']
                     });
 
