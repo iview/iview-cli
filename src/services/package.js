@@ -18,9 +18,9 @@ let file = {
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "vue": "^2.2.6",
-        "vue-router": "^2.3.1",
-        "iview": "^2.0.0-rc.13"
+        "vue": "^2.5.2",
+        "vue-router": "^2.8.1",
+        "iview": "^2.7.2"
     },
     "devDependencies": {
         "autoprefixer-loader": "^2.0.0",
@@ -42,8 +42,8 @@ let file = {
         "vue-loader": "^11.0.0",
         "vue-style-loader": "^1.0.0",
         "vue-template-compiler": "^2.2.1",
-        "webpack": "^2.2.1",
-        "webpack-dev-server": "^2.4.1",
+        "webpack": "^3.8.1",
+        "webpack-dev-server": "^2.9.2",
         "webpack-merge": "^3.0.0"
     }
 };
