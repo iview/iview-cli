@@ -35,10 +35,11 @@ const app = new Vue({
     el: '#app',
     data: {
         isHidden: false,
-        version: 2,
+        version: 4,
         update: {},
         showUpdate: false,
-        language: language
+        language: language,
+        iviewVersion: 0
     },
     methods: {
         handleCreateApp () {
@@ -47,7 +48,7 @@ const app = new Vue({
         handleOpenDoc () {
             this.isHidden = true;
             setTimeout(() => {
-                window.location.href = 'index_prod.html';
+                window.location.href = 'doc.html';
                 win.setResizable(true);
                 win.maximize();
             }, 100);
@@ -96,6 +97,9 @@ const app = new Vue({
         }
     },
     mounted () {
+        axios.get('https://api.github.com/repos/iview/iview/releases/latest').then(res => {
+            this.iviewVersion = res.data.tag_name.substr(1);
+        })
         this.checkUpdate();
     }
 });

@@ -1,6 +1,6 @@
 {
   "name": "iview-cli",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "title": "iView Cli",
   "description": "Quick way to create an iView project.",
   "homepage": "http://www.iviewui.com",
@@ -40,13 +40,14 @@
     "vue-i18n": "^5.0.3"
   },
   "devDependencies": {
+    "electron": "^1.7.9",
     "electron-packager": "^8.7.2",
     "electron-prebuilt": "^1.4.13",
     "gulp": "^3.9.1",
     "vue-i18n": "^5.0.3"
   },
   "update": {
-    "version": 3,
+    "version": 4,
     "mac": "http://git.oschina.net/icarusion/iviewcli/raw/master/iView-cli-2.0.0.dmg",
     "windows": "http://git.oschina.net/icarusion/iviewcli/raw/master/iView-cli-2.0.0-win32-x64.zip",
     "desc": "<li>全面升级至2.0</li>"
