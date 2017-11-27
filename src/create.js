@@ -6,8 +6,33 @@ const dialog = remote.dialog;
 const shell = electron.shell;
 
 const fs = require('fs');
+const path = require('path');
+
+const zhLang = require('../assets/lang/zh').zhLang;
+const enLang = require('../assets/lang/en').enLang;
+const i18n = require('vue-i18n');
+let locales = {
+    en: {
+        message: enLang
+    },
+    zh: {
+        message: zhLang
+    }
+}
+
+let _path = path.join(__dirname, '../conf/lang.json');
+let getLang = fs.readFileSync(_path);
+let language = getLang? JSON.parse(getLang): { lang: 'zh', message: 'EN' };
+Vue.config.lang = language.lang;
+ 
+Object.keys(locales).forEach(function(lang){
+    Vue.locale(lang, locales[lang])
+})
+
 const createPackage = require('../src/services/package');
+const createBabel = require('../src/services/babel');
 const { createWebpackBase, createWebpackDev, createWebpackProd } = require('../src/services/webpack');
+const createVendors = require('../src/services/vendors');
 const createRouter = require('../src/services/router');
 const createI18n = require('../src/services/i18n');
 const createApp = require('../src/services/app');
@@ -17,7 +42,7 @@ const createIndexHtml = require('../src/services/index-html');
 const createMain = require('../src/services/main');
 const createConfig = require('../src/services/config');
 const createUtil = require('../src/services/util');
-const { createVuexStore, createVuexActions, createVuexMutations } = require('../src/services/vuex');
+// const { createVuexStore, createVuexActions, createVuexMutations } = require('../src/services/vuex');
 const createBus = require('../src/services/bus');
 const { createESLintRc, createESLintIgnore } = require('../src/services/eslint');
 const createGitignore = require('../src/services/gitignore');
@@ -41,7 +66,7 @@ const app = new Vue({
     el: '#app',
     data: {
         formValidate: {
-            iviewVersion: '1.x',
+            iviewVersion: '2.x',
             css: [],
             ajax: true,
             i18n: false,
@@ -61,9 +86,11 @@ const app = new Vue({
         status: 'options',    // options,log,next
         log: {    // 1 is doing, 2 is done, 3 is error
             package: 1,
+            babel: 1,
             webpackBase: 1,
             webpackDev: 1,
             webpackProd: 1,
+            vendors: 1,
             router: 1,
             i18n: 1,
             app: 1,
@@ -73,15 +100,16 @@ const app = new Vue({
             main: 1,
             config: 1,
             util: 1,
-            vuexStore: 1,
-            vuexActions: 1,
-            vuexMutations: 1,
+            // vuexStore: 1,
+            // vuexActions: 1,
+            // vuexMutations: 1,
             bus: 1,
             eslintRc: 1,
             eslintIgnore: 1,
             gitignore: 1,
             editorconfig: 1
-        }
+        },
+        language: language,
     },
     computed: {
         titleStatus () {
@@ -116,7 +144,7 @@ const app = new Vue({
             this.$refs[name].validate((valid) => {
                 if (valid) {
                     saveDirectory = dialog.showOpenDialog(win, {
-                        title: '选择工程保存目录',
+                        title: app.$t('message.selectDir'),
                         properties: ['openDirectory', 'createDirectory']
                     });
 
@@ -133,6 +161,18 @@ const app = new Vue({
                             },
                             error: () => {
                                 this.log.package = 3;
+                            }
+                        });
+
+                        // .babelrc
+                        createBabel({
+                            data: this.formValidate,
+                            directory: saveDirectory,
+                            success: () => {
+                                this.log.babel = 2;
+                            },
+                            error: () => {
+                                this.log.babel = 3;
                             }
                         });
 
@@ -165,6 +205,18 @@ const app = new Vue({
                             },
                             error: () => {
                                 this.log.webpackProd = 3;
+                            }
+                        });
+
+                        // vendors
+                        createVendors({
+                            data: this.formValidate,
+                            directory: saveDirectory,
+                            success: () => {
+                                this.log.vendors = 2;
+                            },
+                            error: () => {
+                                this.log.vendors = 3;
                             }
                         });
 
@@ -279,38 +331,38 @@ const app = new Vue({
                         });
 
                         // vuex
-                        if (this.formValidate.store.indexOf('vuex') > -1) {
-                            createVuexStore({
-                                data: this.formValidate,
-                                directory: saveDirectory,
-                                success: () => {
-                                    this.log.vuexStore = 2;
-                                },
-                                error: () => {
-                                    this.log.vuexStore = 3;
-                                }
-                            });
-                            createVuexActions({
-                                data: this.formValidate,
-                                directory: saveDirectory,
-                                success: () => {
-                                    this.log.vuexActions = 2;
-                                },
-                                error: () => {
-                                    this.log.vuexActions = 3;
-                                }
-                            });
-                            createVuexMutations({
-                                data: this.formValidate,
-                                directory: saveDirectory,
-                                success: () => {
-                                    this.log.vuexMutations = 2;
-                                },
-                                error: () => {
-                                    this.log.vuexMutations = 3;
-                                }
-                            });
-                        }
+                        // if (this.formValidate.store.indexOf('vuex') > -1) {
+                        //     createVuexStore({
+                        //         data: this.formValidate,
+                        //         directory: saveDirectory,
+                        //         success: () => {
+                        //             this.log.vuexStore = 2;
+                        //         },
+                        //         error: () => {
+                        //             this.log.vuexStore = 3;
+                        //         }
+                        //     });
+                        //     createVuexActions({
+                        //         data: this.formValidate,
+                        //         directory: saveDirectory,
+                        //         success: () => {
+                        //             this.log.vuexActions = 2;
+                        //         },
+                        //         error: () => {
+                        //             this.log.vuexActions = 3;
+                        //         }
+                        //     });
+                        //     createVuexMutations({
+                        //         data: this.formValidate,
+                        //         directory: saveDirectory,
+                        //         success: () => {
+                        //             this.log.vuexMutations = 2;
+                        //         },
+                        //         error: () => {
+                        //             this.log.vuexMutations = 3;
+                        //         }
+                        //     });
+                        // }
 
                         // bus.js
                         if (this.formValidate.store.indexOf('bus.js') > -1) {

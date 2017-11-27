@@ -1,6 +1,6 @@
 {
   "name": "iview-cli",
-  "version": "1.0.0",
+  "version": "2.1.0",
   "title": "iView Cli",
   "description": "Quick way to create an iView project.",
   "homepage": "http://www.iviewui.com",
@@ -13,11 +13,11 @@
   "main": "main.js",
   "scripts": {
     "start": "electron main.js",
-    "build:linux32": "electron-packager ./ iView --platform=linux --arch=ia32 ~/Desktop/iView --version 0.30.2 --overwrite --icon=./assets/img/iView.icns",
-    "build:linux64": "electron-packager ./ iView --platform=linux --arch=x64 ~/Desktop/iView --version 0.30.2 --overwrite --icon=./assets/img/iView.icns",
-    "build:mac": "electron-packager ./ iView --platform=darwin --arch=x64 ~/Desktop/iView --version 0.30.2 --overwrite --icon=./assets/img/iView.icns",
-    "build:win32": "electron-packager ./ iView --platform=win32 --arch=ia32 ~/Desktop/iView --version 0.30.2 --overwrite --icon=./assets/img/iView.icns",
-    "build:win64": "electron-packager ./ iView --platform=win32 --arch=x64 ~/Desktop/iView --version 0.30.2 --overwrite --icon=./assets/img/iView.icns",
+    "build:linux32": "electron-packager ./ iView --platform=linux --arch=ia32 ~/Desktop/iView --electronVersion=1.4.15 --overwrite --icon=./assets/img/iView.icns",
+    "build:linux64": "electron-packager ./ iView --platform=linux --arch=x64 ~/Desktop/iView --electronVersion=1.4.15 --overwrite --icon=./assets/img/iView.icns",
+    "build:mac": "electron-packager ./ iView --platform=darwin --arch=x64 ~/Desktop/iView --electronVersion=1.7.6 --overwrite --icon=./assets/img/iView.icns",
+    "build:win32": "electron-packager ./ iView --platform=win32 --arch=ia32 ~/Desktop/iView --electronVersion=1.4.15 --overwrite --icon=./assets/img/iView.icns",
+    "build:win64": "electron-packager ./ iView --platform=win32 --arch=x64 ~/Desktop/iView --electronVersion=1.4.15 --overwrite --icon=./assets/img/iView.icns",
     "appdmg": "appdmg appdmg.json ~/Desktop/iView.dmg"
   },
   "repository": {
@@ -30,19 +30,26 @@
     "url": "https://github.com/iview/iview-cli/issues"
   },
   "dependencies": {
+    "ajv": "^5.2.2",
+    "ajv-keywords": "^2.1.0",
     "axios": "^0.15.3",
-    "iview": "^0.9.17",
-    "js-beautify": "^1.6.9",
-    "vue": "^1.0.28"
+    "electron-connect": "^0.6.2",
+    "iview": "^2.4.0",
+    "js-beautify": "^1.7.3",
+    "vue": "^2.4.4",
+    "vue-i18n": "^5.0.3"
   },
   "devDependencies": {
-    "electron-packager": "^8.5.1",
-    "electron-prebuilt": "^1.4.13"
+    "electron": "^1.7.9",
+    "electron-packager": "^8.7.2",
+    "electron-prebuilt": "^1.4.13",
+    "gulp": "^3.9.1",
+    "vue-i18n": "^5.0.3"
   },
   "update": {
-    "version": 2,
-    "mac": "https://github.com/iview/iview-cli/releases/download/v1.0.0/iView-cli-mac.dmg",
-    "windows": "https://github.com/iview/iview-cli/releases/download/v1.0.0/iView-cli-windows-x64.zip",
-    "desc": "<li>离线文档支持 iView 1.0.0 版本</li>"
+    "version": 4,
+    "mac": "http://git.oschina.net/icarusion/iviewcli/raw/master/iView-cli-2.0.0.dmg",
+    "windows": "http://git.oschina.net/icarusion/iviewcli/raw/master/iView-cli-2.0.0-win32-x64.zip",
+    "desc": "<li>全面升级至2.0</li>"
   }
 }

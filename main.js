@@ -1,6 +1,7 @@
 const { app, BrowserWindow, Menu } = require('electron');
 const path = require('path');
 const url = require('url');
+const fs = require('fs');
 
 let logo = path.join(__dirname, 'assets/img/logo.png');
 let win = null;
@@ -13,7 +14,10 @@ function createWindow () {
         width: 360,
         // width: 1000,
         height: 572,
+        // height: 700,
         title: 'iView',
+        // y:200,
+        // x:20,
         center: true,
         resizable: false,
         icon: logo,
@@ -41,19 +45,19 @@ function createWindow () {
     });
 }
 
-function createMenu () {
+function createMenu (language) {
     const template = [
         {
             label: app.getName(),
             submenu: [
                 {
-                    label: '关于 iView',
+                    label: (language.lang==="zh"? "关于": "about")+' iView Cli',
                     click () {
                         if (win_about == null) {
                             win_about = new BrowserWindow({
                                 width: 300,
                                 height: 180,
-                                title: '关于 iView',
+                                title: (language.lang==="zh"? "关于": "about")+' iView',
                                 center: true,
                                 resizable: false,
                                 icon: logo,
@@ -75,7 +79,7 @@ function createMenu () {
                 },
                 {
                     role: 'quit',
-                    label: '退出 iView'
+                    label: (language.lang==="zh"? "退出": "Quit")
                 }
             ]
         }
@@ -85,9 +89,13 @@ function createMenu () {
 }
 
 app.on('ready', () => {
+    let _path = path.join(__dirname, './conf/lang.json');
+    let data = fs.readFileSync(_path);
+    let language = data?JSON.parse(data):{ lang: 'zh', message: 'EN' };
     createWindow();
-    createMenu();
+    createMenu(language);
 });
+
 app.on('activate', () => {
     if (win == null) {
         createWindow();

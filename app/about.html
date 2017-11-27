@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>关于 iView</title>
+    <title>关于 iView Cli</title>
     <link rel="stylesheet" href="../assets/css/iview.css">
     <style type="text/css">
         body{
@@ -18,6 +18,11 @@
         }
     </style>
     <script type="text/javascript">
+        const path = require('path');
+        const fs = require('fs');
+        let _path = path.join(__dirname, '../conf/lang.json');
+        let data = fs.readFileSync(_path);
+        document.title = data.lang==="zh"?"关于 iView Cli":"About iView Cli";
         function openLink(event) {
             event.preventDefault();
             require('electron').shell.openExternal('https://github.com/iview/iview-cli');
@@ -27,7 +32,7 @@
 <body>
     <div class="about">
         <img src="../assets/img/logo.png">
-        <p>iView v1.0.0</p>
+        <p>iView v2.0.0</p>
         <a href="https://github.com/iview/iview-cli" onclick="openLink(event)">https://github.com/iview/iview-cli</a>
     </div>
 </body>

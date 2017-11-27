@@ -18,7 +18,7 @@ module.exports = function (opts) {
         });
     `;
     writeFile({
-        directory: `${opts.directory}/src/components`,
+        directory: `${opts.directory}/src`,
         fileName: 'bus.js',
         data: file,
         success () {

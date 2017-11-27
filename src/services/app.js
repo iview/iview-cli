@@ -14,7 +14,7 @@ module.exports = function (opts) {
                 
             };
         },
-        ready () {
+        mounted () {
 
         },
         beforeDestroy () {
@@ -27,7 +27,7 @@ module.exports = function (opts) {
 </script>
     `;
     writeFile({
-        directory: `${opts.directory}/src/components`,
+        directory: `${opts.directory}/src`,
         fileName: 'app.vue',
         data: file,
         codeType: 'html',
