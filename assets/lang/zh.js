@@ -2,7 +2,7 @@ exports.zhLang = {
     newProject: '新建工程',
     intro: '高效、卓越的整套前端解决方案',
     docOffline: '离线文档',
-    iviewVersion: '当前iView离线文档版本',
+    iviewVersion: '当前文档版本',
     newVersion: '发现新版本',
     download: '下载',
     updatedContent: '更新内容',
