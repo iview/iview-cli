@@ -71,7 +71,7 @@ const app = new Vue({
                             setTimeout(() => {
                                 msg();
                                 this.$Modal.info({
-                                    title: app.$t('message.intro'),
+                                    title: app.$t('message.checkUpdate'),
                                     content: app.$t('message.isLatestVersion'),
                                     okText: app.$t('message.ok')
                                 })
