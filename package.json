@@ -1,6 +1,6 @@
 {
   "name": "iview-cli",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "title": "iView Cli",
   "description": "Quick way to create an iView project.",
   "homepage": "http://www.iviewui.com",
@@ -44,6 +44,7 @@
     "electron-packager": "^8.7.2",
     "electron-prebuilt": "^1.4.13",
     "gulp": "^3.9.1",
+    "iview-loader": "^1.0.0",
     "vue-i18n": "^5.0.3"
   },
   "update": {

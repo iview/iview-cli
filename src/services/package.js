@@ -20,7 +20,7 @@ let file = {
     "dependencies": {
         "vue": "^2.5.2",
         "vue-router": "^2.8.1",
-        "iview": "^2.7.2"
+        "iview": "^2.7.3"
     },
     "devDependencies": {
         "autoprefixer-loader": "^2.0.0",
@@ -41,6 +41,7 @@ let file = {
         "vue-html-loader": "^1.2.3",
         "vue-loader": "^11.0.0",
         "vue-style-loader": "^1.0.0",
+        "iview-loader": "^1.0.0",
         "vue-template-compiler": "^2.2.1",
         "webpack": "^3.8.1",
         "webpack-dev-server": "^2.9.2",
