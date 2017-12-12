@@ -35,6 +35,7 @@ let file = {
         "file-loader": "^0.8.5",
         "html-loader": "^0.3.0",
         "html-webpack-plugin": "^2.28.0",
+        "iview-loader": "^1.0.0",
         "style-loader": "^0.13.1",
         "url-loader": "^0.5.7",
         "vue-hot-reload-api": "^1.3.3",
