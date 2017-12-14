@@ -18,35 +18,40 @@ let file = {
     "author": "",
     "license": "MIT",
     "dependencies": {
+        "axios": "^0.17.1",
+        "iview": "^2.7.4",
         "vue": "^2.5.2",
-        "vue-router": "^2.8.1",
-        "iview": "^2.7.2"
-    },
-    "devDependencies": {
-        "autoprefixer-loader": "^2.0.0",
+        "vue-router": "^3.0.1"
+      },
+      "devDependencies": {
+        "autoprefixer-loader": "^3.2.0",
         "babel": "^6.23.0",
         "babel-core": "^6.23.1",
-        "babel-loader": "^6.2.4",
+        "babel-loader": "^7.1.2",
         "babel-plugin-transform-runtime": "^6.12.0",
         "babel-preset-es2015": "^6.9.0",
         "babel-runtime": "^6.11.6",
-        "css-loader": "^0.23.1",
-        "extract-text-webpack-plugin": "^2.0.0",
-        "file-loader": "^0.8.5",
-        "html-loader": "^0.3.0",
+        "css-loader": "^0.28.7",
+        "eslint": "^4.13.1",
+        "eslint-plugin-html": "^4.0.1",
+        "extract-text-webpack-plugin": "^3.0.2",
+        "file-loader": "^1.1.5",
+        "html-loader": "^0.5.1",
         "html-webpack-plugin": "^2.28.0",
         "iview-loader": "^1.0.0",
-        "style-loader": "^0.13.1",
-        "url-loader": "^0.5.7",
-        "vue-hot-reload-api": "^1.3.3",
+        "less": "^2.7.3",
+        "less-loader": "^4.0.5",
+        "style-loader": "^0.19.1",
+        "url-loader": "^0.6.2",
+        "vue-hot-reload-api": "^2.2.4",
         "vue-html-loader": "^1.2.3",
-        "vue-loader": "^11.0.0",
-        "vue-style-loader": "^1.0.0",
+        "vue-loader": "^13.5.0",
+        "vue-style-loader": "^3.0.3",
         "vue-template-compiler": "^2.2.1",
         "webpack": "^3.8.1",
         "webpack-dev-server": "^2.9.2",
-        "webpack-merge": "^3.0.0"
-    }
+        "webpack-merge": "^4.1.1"
+      }
 };
 
 module.exports = function (opts) {
