@@ -23,9 +23,9 @@
 
 ## [Download Released App](https://github.com/iview/iview-cli/releases)
 
-## Donation
-iView-cli is an MIT licensed open source project and completely free to use, but if it is helpful to you, you can buy me a coffee :)
+## License
+[MIT](http://opensource.org/licenses/MIT)
 
-<p align="center">
-    <img src="https://raw.githubusercontent.com/iview/iview/master/assets/pay.png">
-</p>
+Copyright (c) 2016-present, TalkingData
+
+
