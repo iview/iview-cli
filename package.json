@@ -32,7 +32,7 @@
   "dependencies": {
     "ajv": "^5.2.2",
     "ajv-keywords": "^2.1.0",
-    "axios": "^0.15.3",
+    "axios": "^0.21.1",
     "electron-connect": "^0.6.2",
     "iview": "^2.4.0",
     "js-beautify": "^1.7.3",
