@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "electron": "^1.7.9",
-    "electron-packager": "^8.7.2",
+    "electron-packager": "^16.0.0",
     "electron-prebuilt": "^1.4.13",
     "gulp": "^3.9.1",
     "vue-i18n": "^5.0.3"
